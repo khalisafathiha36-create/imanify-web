@@ -99,24 +99,8 @@
 
         <div class="space-y-4">
             <h2 class="text-xs font-bold tracking-wider text-[#D4AF37] uppercase mb-2">💬 Cerita & Reminder Terbaru</h2>
-            
             <div id="feed-container" class="space-y-4">
-                <div class="glass-card p-5 rounded-2xl border border-white/5">
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="text-xs font-bold text-white">Hamba Allah</span>
-                        <span class="text-[10px] text-gray-500">Baru saja</span>
-                    </div>
-                    <p class="text-xs md:text-sm text-gray-300 leading-relaxed">"Jangan lupa baca Al-Kahfi ya teman-teman karena ini hari Jum'at. Semoga Allah menerangi langkah kita sampai Jum'at berikutnya. Semangat ibadahnya!"</p>
                 </div>
-
-                <div class="glass-card p-5 rounded-2xl border border-white/5">
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="text-xs font-bold text-white">Ahmad F.</span>
-                        <span class="text-[10px] text-gray-500">1 jam yang lalu</span>
-                    </div>
-                    <p class="text-xs md:text-sm text-gray-300 leading-relaxed">"Reminder buat diriku sendiri: Seberat apa pun urusan dunia hari ini, ingatlah kalau shalat itu adalah penenang terbaik yang sesungguhnya."</p>
-                </div>
-            </div>
         </div>
     </main>
 
@@ -133,45 +117,87 @@
         const mobileMenu = document.getElementById('mobile-menu');
         menuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
 
-        // Logika Pengiriman Postingan Baru Dinamis
+        // Database Default Postingan jika localStorage kosong
+        const defaultPosts = [
+            { name: "Hamba Allah", time: "Baru saja", content: "Jangan lupa baca Al-Kahfi ya teman-teman karena ini hari Jum'at. Semoga Allah menerangi langkah kita sampai Jum'at berikutnya. Semangat ibadahnya!", isDefault: true },
+            { name: "Ahmad F.", time: "1 jam yang lalu", content: "Reminder buat diriku sendiri: Seberat apa pun urusan dunia hari ini, ingatlah kalau shalat itu adalah penenang terbaik yang sesungguhnya.", isDefault: true }
+        ];
+
         const btnPost = document.getElementById('btn-post');
         const feedContainer = document.getElementById('feed-container');
+        const nameInput = document.getElementById('user-name');
 
+        // Mengambil nama user dari localStorage jika pernah diset di halaman Home/Login
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedProfileName = localStorage.getItem('profileName');
+            if (savedProfileName) {
+                nameInput.value = savedProfileName;
+            }
+            loadPosts();
+        });
+
+        // Fungsi memuat postingan
+        function loadPosts() {
+            feedContainer.innerHTML = "";
+            let localPosts = JSON.parse(localStorage.getItem('imanify_posts')) || [];
+            
+            // Gabungkan postingan baru buatan user dengan postingan default bawaan
+            let allPosts = [...localPosts, ...defaultPosts];
+
+            allPosts.forEach(post => {
+                const postCard = document.createElement('div');
+                postCard.className = "glass-card p-5 rounded-2xl border border-white/5 transition duration-300";
+                
+                // Variasi warna nama khusus untuk user aktif / postingan kustom
+                const nameColor = post.isDefault ? "text-white" : "text-[#D4AF37]";
+                const timeColor = post.isDefault ? "text-gray-500" : "text-emerald-400 font-medium";
+
+                postCard.innerHTML = `
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-xs font-bold ${nameColor}">${post.name}</span>
+                        <span class="text-[10px] ${timeColor}">${post.time}</span>
+                    </div>
+                    <p class="text-xs md:text-sm text-gray-300 leading-relaxed">${post.content}</p>
+                `;
+                feedContainer.appendChild(postCard);
+            });
+        }
+
+        // Logika Pengiriman Postingan Baru
         btnPost.addEventListener('click', () => {
-            const nameInput = document.getElementById('user-name').value.trim();
+            const authorName = nameInput.value.trim();
             const contentInput = document.getElementById('post-content').value.trim();
 
-            // Validasi Input Kosong
             if (!contentInput) {
                 alert("Isi tulisan pengingatmu terlebih dahulu sebelum dibagikan!");
                 return;
             }
 
-            // Set nama default kalau anonim / kosong
-            const finalName = nameInput === "" ? "Hamba Allah" : nameInput;
+            const finalName = authorName === "" ? "Hamba Allah" : authorName;
 
-            // Membuat element card post baru
-            const postCard = document.createElement('div');
-            postCard.className = "glass-card p-5 rounded-2xl border border-[#D4AF37]/40 animate-fade-in";
-            postCard.innerHTML = `
-                <div class="flex justify-between items-center mb-2">
-                    <span class="text-xs font-bold text-[#D4AF37]">${finalName}</span>
-                    <span class="text-[10px] text-emerald-400 font-medium">Baru saja</span>
-                </div>
-                <p class="text-xs md:text-sm text-white leading-relaxed">${contentInput}</p>
-            `;
+            // Simpan objek postingan baru
+            const newPost = {
+                name: finalName,
+                time: "Baru saja",
+                content: contentInput,
+                isDefault: false
+            };
 
-            // Menyisipkan postingan baru di paling atas daftar feed
-            feedContainer.insertBefore(postCard, feedContainer.firstChild);
+            // Ambil data lama, selipkan data baru di paling atas larik (array)
+            let currentLocalPosts = JSON.parse(localStorage.getItem('imanify_posts')) || [];
+            currentLocalPosts.unshift(newPost);
+            
+            // Simpan kembali ke penyimpanan browser
+            localStorage.setItem('imanify_posts', JSON.stringify(currentLocalPosts));
 
-            // Bersihkan form text input setelah terkirim
-            document.getElementById('user-name').value = "";
+            // Perbarui tampilan feed & bersihkan teks box input
+            loadPosts();
             document.getElementById('post-content').value = "";
         });
     </script>
     <script>
-    // Otomatis mencari dan menghapus semua tombol/menu yang mengarah ke login.html
-    document.querySelectorAll('a[href="login.html"]').forEach(el => el.remove());
-</script>
+        // Otomatis mencari dan menghapus semua tombol/menu yang mengarah ke login.html
+        document.querySelectorAll('a[href="login.html"]').forEach(el => el.remove());
+    </script>
 </body>
 </html>
