@@ -101,7 +101,7 @@
                     src="about:blank" 
                     allowfullscreen="" 
                     loading="lazy">
-                </iframe >
+                </iframe>
             </div>
 
             <div id="rekomendasi-container" class="space-y-4">
@@ -142,6 +142,7 @@
         function updateMap(query) {
             const mapFrame = document.getElementById('map-frame');
             const cleanQuery = encodeURIComponent(query);
+            // Menggunakan tanda dolar ($) yang benar agar dibaca sebagai variabel JavaScript
             mapFrame.src = `https://maps.google.com/maps?q=${cleanQuery}&t=&z=14&ie=UTF-8&iwloc=&output=embed`;
         }
 
@@ -200,7 +201,6 @@
         });
     </script>
     <script>
-        // Menghapus tombol/menu login secara otomatis jika ada
         document.querySelectorAll('a[href="login.html"]').forEach(el => el.remove());
     </script>
 </body>
