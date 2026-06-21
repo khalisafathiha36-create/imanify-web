@@ -114,7 +114,7 @@
                     </div>
                     
                     <div class="w-20 h-20 md:w-24 md:h-24 mx-auto mb-5 bg-gradient-to-b from-[#D4AF37] to-[#0F766E] rounded-full flex items-center justify-center text-3xl md:text-4xl shadow-lg shadow-[#0F766E]/20 select-none">
-                        🕌
+                        放置🕌
                     </div>
                     
                     <h3 class="text-xl font-semibold mb-2">Imanify</h3>
@@ -277,12 +277,6 @@
     </footer>
 
     <script>
-        // --- 0. SATPAM HALAMAN (CEK LOGIN) ---
-        const sesiAktif = localStorage.getItem('imanify_session');
-        if (!sesiAktif) {
-            window.location.href = "login.html";
-        }
-
         // --- 1. Logika Responsive Mobile Navbar ---
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -305,7 +299,7 @@
                 surat: "QS. Al-Baqarah: 152"
             },
             {
-                arab: "وَإِن تَعُدُّوا۟ نِعْمَةَ ٱللَّهِ لَا تُحْصُوهَآ",
+                arab: "وَإِن تَعُدُwâ نِعْمَةَ ٱللَّهِ لَا تُحْصُوهَآ",
                 latin: "Wa in ta'udduu ni'matallahi laa tuhshuuhā.",
                 arti: "Dan jika kamu menghitung nikmat Allah, niscaya kamu tidak akan mampu menentukan jumlahnya.",
                 surat: "QS. Ibrahim: 34"
@@ -404,9 +398,9 @@
         // --- 5. Logika Pop Up Sapaan Setelah Login ---
         function cekSapaanLogin() {
             const urlParams = new URLSearchParams(window.location.search);
-            const namaUser = localStorage.getItem('imanify_session');
+            const namaUser = localStorage.getItem('imanify_session') || "Teman Imanify";
 
-            if (urlParams.get('login') === 'success' && namaUser) {
+            if (urlParams.get('login') === 'success') {
                 const popup = document.getElementById('welcome-popup');
                 const userEl = document.getElementById('welcome-user');
                 
@@ -430,9 +424,5 @@
             cekSapaanLogin();
         });
     </script>
-    <script>
-    // Otomatis mencari dan menghapus semua tombol/menu yang mengarah ke login.html
-    document.querySelectorAll('a[href="login.html"]').forEach(el => el.remove());
-</script>
 </body>
 </html>
