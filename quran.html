@@ -106,17 +106,12 @@
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         if (menuBtn && mobileMenu) {
-            menuBtn.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
+            menuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
         }
 
-        // Variabel Audio & Data global
-        let audioPlayer = new Audio();
-        let suratSedangDiputar = null;
         let masterDataSurat = [];
 
-        // Fungsi Load data surat dari API
+        // Fungsi Ambil data dari API
         async function fetchSurat() {
             const container = document.getElementById('container-quran');
             try {
@@ -133,7 +128,7 @@
             }
         }
 
-        // Fungsi Render List HTML
+        // Render List HTML Kartu Surah
         function renderSurat(listSurat) {
             const container = document.getElementById('container-quran');
             if(!container) return;
@@ -150,13 +145,12 @@
                 
                 card.innerHTML = `
                     <div class="flex items-center gap-4">
-                        <div id="icon-${surat.nomor}" class="w-10 h-10 bg-[#0F766E]/20 text-[#D4AF37] font-bold text-sm rounded-xl flex items-center justify-center group-hover:bg-[#0F766E] group-hover:text-white transition">
+                        <div class="w-10 h-10 bg-[#0F766E]/20 text-[#D4AF37] font-bold text-sm rounded-xl flex items-center justify-center group-hover:bg-[#0F766E] group-hover:text-white transition">
                             ${surat.nomor}
                         </div>
                         <div>
                             <h3 class="font-semibold text-sm text-white group-hover:text-[#D4AF37] transition">${surat.namaLatin}</h3>
                             <p class="text-[11px] text-gray-400 mt-0.5">${surat.arti} • ${surat.jumlahAyat} Ayat</p>
-                            <span id="status-${surat.nomor}" class="text-[10px] text-emerald-400 hidden mt-0.5 animate-pulse">▶ Memutar Murottal...</span>
                         </div>
                     </div>
                     <div class="text-right">
@@ -164,56 +158,23 @@
                     </div>
                 `;
 
-                // Logika klik putar audio per surah
-                // GANTI LOGIKA KLIK KARTU DI quran.html MENJADI SEPERTI INI:
-card.addEventListener('click', () => {
-    // Berpindah ke halaman baca.html sambil membawa nomor surah yang diklik
-    window.location.href = `baca.html?surah=${surat.nomor}`;
-});
+                // Pindah halaman ke baca.html dengan parameter nomor surah
+                card.addEventListener('click', () => {
+                    window.location.href = `baca.html?surah=${surat.nomor}`;
+                });
 
                 container.appendChild(card);
             });
         }
 
-        function updateTampilanPutar(nomor) {
-            const txt = document.getElementById(`status-${nomor}`);
-            const ico = document.getElementById(`icon-${nomor}`);
-            if (txt) txt.classList.remove('hidden');
-            if (ico) {
-                ico.innerHTML = "♫";
-                ico.className = "w-10 h-10 bg-[#D4AF37] text-[#0B1E1C] font-bold text-sm rounded-xl flex items-center justify-center";
-            }
-        }
-
-        function updateTampilanPause(nomor) {
-            const txt = document.getElementById(`status-${nomor}`);
-            const ico = document.getElementById(`icon-${nomor}`);
-            if (txt) txt.classList.add('hidden');
-            if (ico) {
-                ico.innerHTML = nomor;
-                ico.className = "w-10 h-10 bg-[#0F766E]/20 text-[#D4AF37] font-bold text-sm rounded-xl flex items-center justify-center";
-            }
-        }
-
-        // Jalankan pencarian dinamis saat mengetik nama surah
+        // Sistem Pencarian Real-time
         document.getElementById('search-input').addEventListener('input', (e) => {
             const keyword = e.target.value.toLowerCase();
             const hasilFilter = masterDataSurat.filter(s => s.namaLatin.toLowerCase().includes(keyword));
             renderSurat(hasilFilter);
         });
 
-        audioPlayer.addEventListener('ended', () => {
-            if (suratSedangDiputar !== null) {
-                updateTampilanPause(suratSedangDiputar);
-                suratSedangDiputar = null;
-            }
-        });
-
         window.addEventListener('DOMContentLoaded', fetchSurat);
     </script>
-    <script>
-    // Otomatis mencari dan menghapus semua tombol/menu yang mengarah ke login.html
-    document.querySelectorAll('a[href="login.html"]').forEach(el => el.remove());
-</script>
 </body>
 </html>
