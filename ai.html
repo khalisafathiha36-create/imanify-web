@@ -91,7 +91,7 @@
         <div id="start-box" class="glass-card rounded-2xl p-8 text-center space-y-6">
             <div class="text-5xl">🏆</div>
             <h2 class="text-xl font-semibold">Siap Menguji Wawasanmu?</h2>
-            <p class="text-gray-400 text-xs leading-relaxed">Quiz ini terdiri dari 5 pertanyaan pilihan ganda yang diacak dari bank soal berisi 50 pertanyaan. Dapatkan skor sempurna dan lihat kejutan menarik!</p>
+            <p class="text-gray-400 text-xs leading-relaxed">Quiz ini terdiri dari 5 pertanyaan pilihan ganda yang diacak dari bank soal berisi 50 pertanyaan. Dapatkan skor sempurna dan dengarkan musiknya!</p>
             <button id="btn-start" class="w-full bg-[#0F766E] text-white border border-[#D4AF37]/40 py-3 rounded-xl font-medium hover:bg-[#139288] transition cursor-pointer shadow-lg">Mulai Quiz Sekarang</button>
         </div>
 
@@ -124,7 +124,7 @@
 
     </section>
 
-    <audio id="audio-correct" src="https://assets.mixkit.co/active_storage/sfx/2019/2019-84.wav" preload="auto"></audio>
+    <audio id="audio-bg" src="https://assets.mixkit.co/active_storage/sfx/123/123-84.wav" loop></audio> <audio id="audio-correct" src="https://assets.mixkit.co/active_storage/sfx/2019/2019-84.wav" preload="auto"></audio>
     <audio id="audio-wrong" src="https://assets.mixkit.co/active_storage/sfx/2959/2959-84.wav" preload="auto"></audio>
     <audio id="audio-victory" src="https://assets.mixkit.co/active_storage/sfx/1435/1435-84.wav" preload="auto"></audio>
 
@@ -149,7 +149,7 @@
             });
         }
 
-        // 2. DATABASE BANK SOAL JAUH LEBIH BANYAK (50 SOAL PILIHAN)
+        // 2. DATABASE BANK SOAL (50 SOAL)
         const masterQuizData = [
             { question: "Siapakah nama malaikat yang bertugas sebagai pencabut nyawa?", options: ["Malaikat Jibril", "Malaikat Israfil", "Malaikat Izrail", "Malaikat Mikail"], answer: 2 },
             { question: "Berapakah jumlah rakaat shalat fardhu dalam sehari semalam?", options: ["15 Rakaat", "17 Rakaat", "21 Rakaat", "12 Rakaat"], answer: 1 },
@@ -225,14 +225,13 @@
         const resultEmoji = document.getElementById('result-emoji');
         const resultMessage = document.getElementById('result-message');
 
+        const sndBg = document.getElementById('audio-bg');
         const sndCorrect = document.getElementById('audio-correct');
         const sndWrong = document.getElementById('audio-wrong');
         const sndVictory = document.getElementById('audio-victory');
 
         function prepareQuizQuestions() {
-            // Algoritma Fisher-Yates mengacak 50 soal
             const shuffled = [...masterQuizData].sort(() => 0.5 - Math.random());
-            // Ambil 5 sampel acak saja untuk ronde ini
             quizData = shuffled.slice(0, 5);
         }
 
@@ -241,6 +240,11 @@
             quizBox.classList.remove('hidden');
             prepareQuizQuestions();
             loadQuestion();
+            
+            // 🎵 Mulai mainkan musik latar (Volume dikecilkan sedikit agar seimbang)
+            sndBg.volume = 0.4;
+            sndBg.currentTime = 0;
+            sndBg.play().catch(e => console.log('Music blocked by browser'));
         });
 
         function loadQuestion() {
@@ -307,6 +311,9 @@
             quizBox.classList.add('hidden');
             resultBox.classList.remove('hidden');
             finalScoreText.innerText = score;
+            
+            // 🛑 Matikan musik latar saat hasil keluar
+            sndBg.pause();
 
             if (score === 100) {
                 resultEmoji.innerText = "👑";
@@ -355,6 +362,10 @@
             quizBox.classList.remove('hidden');
             prepareQuizQuestions();
             loadQuestion();
+            
+            // 🎵 Putar lagi musik latarnya saat ulang kuis
+            sndBg.currentTime = 0;
+            sndBg.play().catch(e => console.log('Music blocked'));
         });
     </script>
 </body>
