@@ -6,6 +6,7 @@
     <title>Quiz Islami - Imanify</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -90,7 +91,7 @@
         <div id="start-box" class="glass-card rounded-2xl p-8 text-center space-y-6">
             <div class="text-5xl">🏆</div>
             <h2 class="text-xl font-semibold">Siap Menguji Wawasanmu?</h2>
-            <p class="text-gray-400 text-xs leading-relaxed">Quiz ini terdiri dari 5 pertanyaan pilihan ganda seputar ilmu agama. Dapatkan skor sempurna dan jadilah yang terbaik!</p>
+            <p class="text-gray-400 text-xs leading-relaxed">Quiz ini terdiri dari 5 pertanyaan pilihan ganda yang diacak dari bank soal berisi 50 pertanyaan. Dapatkan skor sempurna dan lihat kejutan menarik!</p>
             <button id="btn-start" class="w-full bg-[#0F766E] text-white border border-[#D4AF37]/40 py-3 rounded-xl font-medium hover:bg-[#139288] transition cursor-pointer shadow-lg">Mulai Quiz Sekarang</button>
         </div>
 
@@ -102,10 +103,9 @@
 
             <h3 id="question-text" class="text-base md:text-lg font-medium leading-relaxed">Loading pertanyaan...</h3>
 
-            <div id="options-container" class="flex flex-col gap-3">
-                </div>
+            <div id="options-container" class="flex flex-col gap-3"></div>
 
-            <button id="btn-next" class="hidden w-full bg-[#D4AF37] text-black py-3 rounded-xl font-semibold hover:bg-[#f3e5ab] transition cursor-pointer text-xs tracking-wider text-center">PERNYATAAN SELANJUTNYA &rarr;</button>
+            <button id="btn-next" class="hidden w-full bg-[#D4AF37] text-black py-3 rounded-xl font-semibold hover:bg-[#f3e5ab] transition cursor-pointer text-xs tracking-wider text-center">PERTANYAAN SELANJUTNYA &rarr;</button>
         </div>
 
         <div id="result-box" class="hidden glass-card rounded-2xl p-8 text-center space-y-6">
@@ -117,12 +117,16 @@
                 <p id="final-score" class="text-4xl font-extrabold text-[#D4AF37]">100</p>
             </div>
 
-            <p id="result-message" class="text-gray-300 text-xs max-w-sm mx-auto leading-relaxed">Masha Allah! Pemahaman agamamu sudah sangat luar biasa. Pertahankan terus ya!</p>
+            <p id="result-message" class="text-gray-300 text-xs max-w-sm mx-auto leading-relaxed">Masha Allah!</p>
             
             <button id="btn-restart" class="w-full bg-[#0F766E] text-white border border-[#D4AF37]/40 py-3 rounded-xl font-medium hover:bg-[#139288] transition cursor-pointer">Coba Quiz Lagi</button>
         </div>
 
     </section>
+
+    <audio id="audio-correct" src="https://assets.mixkit.co/active_storage/sfx/2019/2019-84.wav" preload="auto"></audio>
+    <audio id="audio-wrong" src="https://assets.mixkit.co/active_storage/sfx/2959/2959-84.wav" preload="auto"></audio>
+    <audio id="audio-victory" src="https://assets.mixkit.co/active_storage/sfx/1435/1435-84.wav" preload="auto"></audio>
 
     <footer class="border-t border-gray-800 bg-[#071413] py-8 px-6 text-center text-xs tracking-wide text-gray-500">
         <p class="mb-2">&copy; 2026 Imanify Platform. All rights reserved.</p>
@@ -131,8 +135,8 @@
         </p>
     </footer>
 
-       <script>
-        // Satpam Check Login (Aktifkan jika pakai sistem login)
+    <script>
+        // Satpam Check Login
         const sesiAktif = localStorage.getItem('imanify_session');
         if (!sesiAktif) { window.location.href = "login.html"; }
 
@@ -145,72 +149,70 @@
             });
         }
 
-        // 2. DATABASE BANK SOAL LEBIH BANYAK
+        // 2. DATABASE BANK SOAL JAUH LEBIH BANYAK (50 SOAL PILIHAN)
         const masterQuizData = [
-            {
-                question: "Siapakah nama malaikat yang bertugas sebagai pencabut nyawa?",
-                options: ["Malaikat Jibril", "Malaikat Israfil", "Malaikat Izrail", "Malaikat Mikail"],
-                answer: 2
-            },
-            {
-                question: "Berapakah jumlah rakaat shalat fardhu dalam sehari semalam?",
-                options: ["15 Rakaat", "17 Rakaat", "21 Rakaat", "12 Rakaat"],
-                answer: 1
-            },
-            {
-                question: "Siapakah nama khalifah pertama dari Khulafaur Rasyidin?",
-                options: ["Umar bin Khattab", "Utsman bin Affan", "Ali bin Abi Thalib", "Abu Bakar Ash-Shiddiq"],
-                answer: 3
-            },
-            {
-                question: "Surat apakah yang menjadi surat terpanjang di dalam Al-Qur'an?",
-                options: ["Surat Al-Baqarah", "Surat Ali 'Imran", "Surat Yasin", "Surat Al-Ma'idah"],
-                answer: 0
-            },
-            {
-                question: "Nabi yang diberikan mukjizat tidak hangus terbakar oleh api raja Namrud adalah...",
-                options: ["Nabi Musa A.S", "Nabi Ibrahim A.S", "Nabi Isa A.S", "Nabi Nuh A.S"],
-                answer: 1
-            },
-            {
-                question: "Kota manakah yang menjadi tempat kelahiran Nabi Muhammad SAW?",
-                options: ["Madinah", "Makkah", "Yerusalem", "Thaif"],
-                answer: 1
-            },
-            {
-                question: "Kitab suci Taurat diturunkan kepada nabi...",
-                options: ["Nabi Daud A.S", "Nabi Isa A.S", "Nabi Musa A.S", "Nabi Muhammad SAW"],
-                answer: 2
-            },
-            {
-                question: "Bulan kesembilan dalam kalender Hijriah yang diwajibkan berpuasa adalah bulan...",
-                options: ["Muharram", "Syawal", "Dzulhijjah", "Ramadhan"],
-                answer: 3
-            },
-            {
-                question: "Siapakah nama ibu kandung dari Nabi Muhammad SAW?",
-                options: ["Siti Khadijah", "Siti Aminah", "Siti Fatimah", "Halimah As-Sa'diyyah"],
-                answer: 1
-            },
-            {
-                question: "Peristiwa perjalanan malam Nabi Muhammad SAW dari Masjidil Haram ke Masjidil Aqsa lalu ke Sidratul Muntaha disebut...",
-                options: ["Hijrah", "Fathul Makkah", "Isra Mi'raj", "Nuzulul Qur'an"],
-                answer: 2
-            }
+            { question: "Siapakah nama malaikat yang bertugas sebagai pencabut nyawa?", options: ["Malaikat Jibril", "Malaikat Israfil", "Malaikat Izrail", "Malaikat Mikail"], answer: 2 },
+            { question: "Berapakah jumlah rakaat shalat fardhu dalam sehari semalam?", options: ["15 Rakaat", "17 Rakaat", "21 Rakaat", "12 Rakaat"], answer: 1 },
+            { question: "Siapakah nama khalifah pertama dari Khulafaur Rasyidin?", options: ["Umar bin Khattab", "Utsman bin Affan", "Ali bin Abi Thalib", "Abu Bakar Ash-Shiddiq"], answer: 3 },
+            { question: "Surat apakah yang menjadi surat terpanjang di dalam Al-Qur'an?", options: ["Surat Al-Baqarah", "Surat Ali 'Imran", "Surat Yasin", "Surat Al-Ma'idah"], answer: 0 },
+            { question: "Nabi yang diberikan mukjizat tidak hangus terbakar oleh api raja Namrud adalah...", options: ["Nabi Musa A.S", "Nabi Ibrahim A.S", "Nabi Isa A.S", "Nabi Nuh A.S"], answer: 1 },
+            { question: "Kota manakah yang menjadi tempat kelahiran Nabi Muhammad SAW?", options: ["Madinah", "Makkah", "Yerusalem", "Thaif"], answer: 1 },
+            { question: "Kitab suci Taurat diturunkan kepada nabi...", options: ["Nabi Daud A.S", "Nabi Isa A.S", "Nabi Musa A.S", "Nabi Muhammad SAW"], answer: 2 },
+            { question: "Bulan kesembilan dalam kalender Hijriah yang diwajibkan berpuasa adalah bulan...", options: ["Muharram", "Syawal", "Dzulhijjah", "Ramadhan"], answer: 3 },
+            { question: "Siapakah nama ibu kandung dari Nabi Muhammad SAW?", options: ["Siti Khadijah", "Siti Aminah", "Siti Fatimah", "Halimah As-Sa'diyyah"], answer: 1 },
+            { question: "Peristiwa perjalanan malam Nabi Muhammad SAW dari Masjidil Haram ke Masjidil Aqsa lalu ke Sidratul Muntaha disebut...", options: ["Hijrah", "Fathul Makkah", "Isra Mi'raj", "Nuzulul Qur'an"], answer: 2 },
+            { question: "Siapakah nama sahabat Nabi yang mendapat julukan 'Pedang Allah yang Terhunus'?", options: ["Khalid bin Walid", "Umar bin Khattab", "Hamzah bin Abdul Muthalib", "Ali bin Abi Thalib"], answer: 0 },
+            { question: "Malaikat yang bertugas meniup sangkakala pada hari kiamat adalah...", options: ["Malaikat Malik", "Malaikat Ridwan", "Malaikat Israfil", "Malaikat Munkar"], answer: 2 },
+            { question: "Shalat sunnah yang dikerjakan pada malam hari sesudah shalat Isya sampai sebelum fajar dinamakan...", options: ["Shalat Dhuha", "Shalat Tahajjud", "Shalat Istikhara", "Shalat Rawatib"], answer: 1 },
+            { question: "Berapakah jumlah surah yang terdapat di dalam kitab suci Al-Qur'an?", options: ["112 Surah", "114 Surah", "116 Surah", "120 Surah"], answer: 1 },
+            { question: "Siapakah nama putra Nabi Ibrahim A.S yang rela diqurbankan demi menjalankan perintah Allah?", options: ["Nabi Ishaq A.S", "Nabi Ismail A.S", "Nabi Yusuf A.S", "Nabi Ya'qub A.S"], answer: 1 },
+            { question: "Apa arti dari nama surah terpendek Al-Kautsar dalam Al-Qur'an?", options: ["Nikmat yang banyak", "Pertolongan", "Waktu Subuh", "Masa/Waktu"], answer: 0 },
+            { question: "Zakat yang wajib dikeluarkan oleh setiap Muslim menjelang berakhirnya bulan Ramadhan disebut...", options: ["Zakat Maal", "Zakat Penghasilan", "Zakat Fitrah", "Zakat Perniagaan"], answer: 2 },
+            { question: "Siapakah wanita mulia pertama yang memeluk agama Islam (As-Sabiqunal Awwalun)?", options: ["Siti Aisyah", "Siti Khadijah", "Siti Fatimah", "Siti Aminah"], answer: 1 },
+            { question: "Mukjizat Nabi Musa A.S yang paling terkenal saat dikejar oleh pasukan Fir'awn adalah...", options: ["Dapat berbicara saat bayi", "Membelah laut Merah dengan tongkat", "Menghidupkan orang mati", "Mengeluarkan unta dari batu"], answer: 1 },
+            { question: "Negara tempat runtuhnya kekhalifahan Islam terakhir (Usmani/Ottoman) adalah...", options: ["Mesir", "Arab Saudi", "Turki", "Irak"], answer: 2 },
+            { question: "Berapa jumlah nabi dan rasul yang wajib diketahui oleh umat Islam?", options: ["10 Nabi", "25 Nabi", "50 Nabi", "124 Nabi"], answer: 1 },
+            { question: "Siapakah nama malaikat yang bertugas menjaga pintu surga?", options: ["Malaikat Malik", "Malaikat Ridwan", "Malaikat Jibril", "Malaikat Atid"], answer: 1 },
+            { question: "Siapakah nama malaikat yang bertugas menjaga pintu neraka?", options: ["Malaikat Munkar", "Malaikat Nakir", "Malaikat Malik", "Malaikat Ridwan"], answer: 2 },
+            { question: "Nabi yang memiliki mukjizat bisa memahami bahasa binatang dan menguasai bangsa jin adalah...", options: ["Nabi Sulaiman A.S", "Nabi Daud A.S", "Nabi Adam A.S", "Nabi Yunus A.S"], answer: 0 },
+            { question: "Surah yang pertama kali diturunkan kepada Nabi Muhammad SAW di Gua Hira adalah...", options: ["Surah Al-Fatihah 1-7", "Surah Al-Baqarah 1-5", "Surah Al-Alaq 1-5", "Surah Al-Ikhlas 1-4"], answer: 2 },
+            { question: "Kitab suci Zabur diturunkan oleh Allah SWT kepada nabi...", options: ["Nabi Musa A.S", "Nabi Daud A.S", "Nabi Isa A.S", "Nabi Ibrahim A.S"], answer: 1 },
+            { question: "Kitab suci Injil diturunkan oleh Allah SWT kepada nabi...", options: ["Nabi Isa A.S", "Nabi Musa A.S", "Nabi Yahya A.S", "Nabi Yusuf A.S"], answer: 0 },
+            { question: "Siapakah nama paman Nabi Muhammad SAW yang selalu membela beliau namun wafat dalam keadaan belum memeluk Islam?", options: ["Abu Lahab", "Abu Jahal", "Abu Thalib", "Hamzah"], answer: 2 },
+            { question: "Siapakah nama sahabat Nabi yang dikenal sangat dermawan dan memiliki julukan Dzun Nurain?", options: ["Abu Bakar Ash-Shiddiq", "Umar bin Khattab", "Utsman bin Affan", "Ali bin Abi Thalib"], answer: 2 },
+            { question: "Berapa kali jumlah rukun Islam yang wajib dijalankan oleh umat Muslim?", options: ["4 Rukun", "5 Rukun", "6 Rukun", "7 Rukun"], answer: 1 },
+            { question: "Berapa kali jumlah rukun Iman dalam ajaran agama Islam?", options: ["4 Rukun", "5 Rukun", "6 Rukun", "7 Rukun"], answer: 2 },
+            { question: "Hari raya Idul Adha jatuh pada setiap tanggal berapa di bulan Dzulhijjah?", options: ["1 Syawal", "10 Dzulhijjah", "9 Dzulhijjah", "12 Rabiul Awwal"], answer: 1 },
+            { question: "Shalat sunnah dua rakaat yang dikerjakan setahun sekali pada pagi hari tanggal 1 Syawal disebut...", options: ["Shalat Idul Adha", "Shalat Idul Fitri", "Shalat Istisqa", "Shalat Khusuf"], answer: 1 },
+            { question: "Siapakah muazin (pengumandang azan) pertama dalam sejarah perkembangan Islam?", options: ["Bilal bin Rabah", "Zaid bin Haritsah", "Amar bin Yasir", "Abdullah bin Mas'ud"], answer: 0 },
+            { question: "Nabi yang pernah ditelan oleh ikan paus raksasa namun tetap hidup berkat berdzikir kepada Allah adalah...", options: ["Nabi Yunus A.S", "Nabi Yusuf A.S", "Nabi Nuh A.S", "Nabi Adam A.S"], answer: 0 },
+            { question: "Perang pertama yang dimenangkan oleh umat Islam melawan kaum kafir Quraisy dinamakan perang...", options: ["Perang Uhud", "Perang Badar", "Perang Khandak", "Perang Khaibar"], answer: 1 },
+            { question: "Siapakah nama nabi yang pertama kali diciptakan oleh Allah SWT sekaligus bapak seluruh manusia?", options: ["Nabi Idris A.S", "Nabi Ibrahim A.S", "Nabi Adam A.S", "Nabi Syits A.S"], answer: 2 },
+            { question: "Apakah nama kota yang menjadi tujuan hijrah Nabi Muhammad SAW setelah meninggalkan Makkah?", options: ["Thaif", "Yatsrib (Madinah)", "Abisinia", "Mesir"], answer: 1 },
+            { question: "Hukum memandikan dan menshalatkan jenazah seorang Muslim bagi orang di sekitarnya adalah...", options: ["Fardhu 'Ain", "Fardhu Kifayah", "Sunnah Muakkad", "Mubah"], answer: 1 },
+            { question: "Membaca surah Al-Fatihah di dalam pelaksanaan shalat fardhu termasuk ke dalam...", options: ["Syarat sah shalat", "Rukun shalat", "Sunnah shalat", "Makruh shalat"], answer: 1 },
+            { question: "Siapakah nama istri pertama Nabi Muhammad SAW yang menjadi pendukung utama dakwah beliau?", options: ["Siti Aisyah", "Siti Khadijah", "Siti Hafsah", "Siti Zainab"], answer: 1 },
+            { question: "Masjid yang pertama kali dibangun oleh Nabi Muhammad SAW dalam perjalanan hijrah adalah...", options: ["Masjid Nabawi", "Masjidil Haram", "Masjid Quba", "Masjidil Aqsa"], answer: 2 },
+            { question: "Malaikat yang bertugas mencatat amal perbuatan baik manusia selama di dunia adalah...", options: ["Malaikat Raqib", "Malaikat Atid", "Malaikat Munkar", "Malaikat Jibril"], answer: 0 },
+            { question: "Malaikat yang bertugas mencatat amal perbuatan buruk manusia selama di dunia adalah...", options: ["Malaikat Raqib", "Malaikat Atid", "Malaikat Nakir", "Malaikat Malik"], answer: 1 },
+            { question: "Batas minimal jumlah harta yang wajib dikeluarkan zakatnya apabila sudah mencapai satu tahun disebut...", options: ["Nisab", "Haul", "Kadar", "Infaq"], answer: 0 },
+            { question: "Nabi yang dianugerahi wajah paling tampan dan memiliki mukjizat bisa mentakwilkan/mengartikan mimpi adalah...", options: ["Nabi Yusuf A.S", "Nabi Isa A.S", "Nabi Ismail A.S", "Nabi Muhammad SAW"], answer: 0 },
+            { question: "Berlari-lari kecil antara bukit Shafa dan Marwah dalam ibadah haji dinamakan...", options: ["Thawaf", "Wukuf", "Sa'i", "Tahallul"], answer: 2 },
+            { question: "Mengelilingi Ka'bah sebanyak 7 kali putaran saat beribadah haji atau umrah disebut...", options: ["Sa'i", "Thawaf", "Wukuf", "Ikhram"], answer: 1 },
+            { question: "Gelaran yang diberikan kepada Nabi Muhammad SAW karena sifat beliau yang sangat jujur dan tepercaya adalah...", options: ["As-Siddiq", "Al-Amin", "Al-Faruq", "As-Saif"], answer: 1 },
+            { question: "Surah di dalam Al-Qur'an yang wajib dibaca di setiap rakaat dalam shalat adalah...", options: ["Surah Al-Ikhlas", "Surah Al-Fatihah", "Surah Al-Baqarah", "Surah Yasin"], answer: 1 }
         ];
 
         // 3. STATE MANAGEMENT GAME VARIABLE
-        let quizData = []; // Tempat menampung 5 soal yang sudah diacak
+        let quizData = []; 
         let currentQuestionIndex = 0;
         let score = 0;
         let hasAnswered = false;
 
-        // Kumpulan Element Dom Box Container
         const startBox = document.getElementById('start-box');
         const quizBox = document.getElementById('quiz-box');
         const resultBox = document.getElementById('result-box');
 
-        // Kumpulan Element Dom Konten Komponen
         const btnStart = document.getElementById('btn-start');
         const btnNext = document.getElementById('btn-next');
         const btnRestart = document.getElementById('btn-restart');
@@ -219,30 +221,28 @@
         const qText = document.getElementById('question-text');
         const optionsContainer = document.getElementById('options-container');
 
-        // Element Hasil Akhir
         const finalScoreText = document.getElementById('final-score');
         const resultEmoji = document.getElementById('result-emoji');
         const resultMessage = document.getElementById('result-message');
 
-        // Fungsi untuk mengacak dan mengambil 5 soal dari master data
+        const sndCorrect = document.getElementById('audio-correct');
+        const sndWrong = document.getElementById('audio-wrong');
+        const sndVictory = document.getElementById('audio-victory');
+
         function prepareQuizQuestions() {
-            // Mengacak urutan seluruh bank soal menggunakan algoritma Fisher-Yates
+            // Algoritma Fisher-Yates mengacak 50 soal
             const shuffled = [...masterQuizData].sort(() => 0.5 - Math.random());
-            // Ambil 5 soal saja untuk dimainkan ronde ini
+            // Ambil 5 sampel acak saja untuk ronde ini
             quizData = shuffled.slice(0, 5);
         }
 
-        // 4. ACTION CONTROLLER LOGIC
-        
-        // Memulai Permainan Quiz
         btnStart.addEventListener('click', () => {
             startBox.classList.add('hidden');
             quizBox.classList.remove('hidden');
-            prepareQuizQuestions(); // Acak kumpulan soal baru
+            prepareQuizQuestions();
             loadQuestion();
         });
 
-        // Memuat Pertanyaan Baru Berdasarkan Indeks
         function loadQuestion() {
             hasAnswered = false;
             btnNext.classList.add('hidden');
@@ -250,24 +250,20 @@
 
             const currentData = quizData[currentQuestionIndex];
             
-            // Update teks info progress nomor dan skor live
             qNumberText.innerText = `Pertanyaan ${currentQuestionIndex + 1} dari ${quizData.length}`;
             qLiveScore.innerText = `Skor: ${score}`;
             qText.innerText = currentData.question;
 
-            // Render opsi tombol pilihan jawaban secara dinamis
             currentData.options.forEach((option, index) => {
                 const btnOption = document.createElement('button');
                 btnOption.className = "w-full text-left bg-white/5 border border-white/10 p-4 rounded-xl text-xs hover:bg-white/10 transition cursor-pointer flex justify-between items-center";
                 btnOption.innerHTML = `<span>${option}</span>`;
                 
-                // Menghubungkan fungsi klik validasi jawaban
                 btnOption.addEventListener('click', () => selectAnswer(index, btnOption));
                 optionsContainer.appendChild(btnOption);
             });
         }
 
-        // Memvalidasi Pilihan Jawaban dari Pengguna
         function selectAnswer(selectedIndex, clickedButton) {
             if (hasAnswered) return; 
             hasAnswered = true;
@@ -276,19 +272,21 @@
             const correctIndex = currentData.answer;
             const allOptionButtons = optionsContainer.querySelectorAll('button');
 
-            // Jika jawaban BENAR
             if (selectedIndex === correctIndex) {
                 score += 20; 
                 clickedButton.className = "w-full text-left bg-emerald-500/20 border border-emerald-500 p-4 rounded-xl text-xs font-medium text-emerald-300 flex justify-between items-center";
                 clickedButton.innerHTML += "<span>✅ Benar</span>";
-            } 
-            // Jika jawaban SALAH
-            else {
+                
+                sndCorrect.currentTime = 0;
+                sndCorrect.play().catch(e => console.log('Sfx blocked'));
+            } else {
                 clickedButton.className = "w-full text-left bg-red-500/20 border border-red-500 p-4 rounded-xl text-xs font-medium text-red-300 flex justify-between items-center";
                 clickedButton.innerHTML += "<span>❌ Salah</span>";
 
-                // Beri penanda warna hijau pada tombol yang seharusnya BENAR
                 allOptionButtons[correctIndex].className = "w-full text-left bg-emerald-500/10 border border-emerald-500/50 p-4 rounded-xl text-xs font-medium text-emerald-300 flex justify-between items-center";
+                
+                sndWrong.currentTime = 0;
+                sndWrong.play().catch(e => console.log('Sfx blocked'));
             }
 
             allOptionButtons.forEach(btn => btn.style.cursor = 'default');
@@ -296,10 +294,8 @@
             btnNext.classList.remove('hidden');
         }
 
-        // Mengatur Alur Tombol Lanjut (Next Question)
         btnNext.addEventListener('click', () => {
             currentQuestionIndex++;
-
             if (currentQuestionIndex < quizData.length) {
                 loadQuestion();
             } else {
@@ -307,7 +303,6 @@
             }
         });
 
-        // Menampilkan Layar Hasil Akhir Game
         function showFinalResult() {
             quizBox.classList.add('hidden');
             resultBox.classList.remove('hidden');
@@ -316,6 +311,34 @@
             if (score === 100) {
                 resultEmoji.innerText = "👑";
                 resultMessage.innerText = "Masha Allah! Luar biasa sempurna. Seluruh wawasan agamamu teruji sangat matang dan akurat.";
+                
+                sndVictory.currentTime = 0;
+                sndVictory.play().catch(e => console.log('Sfx blocked'));
+
+                var duration = 3 * 1000;
+                var end = Date.now() + duration;
+
+                (function frame() {
+                    confetti({
+                        particleCount: 5,
+                        angle: 60,
+                        spread: 55,
+                        origin: { x: 0 },
+                        colors: ['#D4AF37', '#0F766E', '#FFFFFF']
+                    });
+                    confetti({
+                        particleCount: 5,
+                        angle: 120,
+                        spread: 55,
+                        origin: { x: 1 },
+                        colors: ['#D4AF37', '#0F766E', '#FFFFFF']
+                    });
+
+                    if (Date.now() < end) {
+                        requestAnimationFrame(frame);
+                    }
+                }());
+
             } else if (score >= 60) {
                 resultEmoji.innerText = "🎉";
                 resultMessage.innerText = "Alhamdulillah! Hasil yang sangat bagus. Pemahaman agamamu sudah baik, mari terus tingkatkan belajar.";
@@ -325,13 +348,12 @@
             }
         }
 
-        // Merestart Mengulang Game Kembali dari Awal dengan Soal Baru
         btnRestart.addEventListener('click', () => {
             currentQuestionIndex = 0;
             score = 0;
             resultBox.classList.add('hidden');
             quizBox.classList.remove('hidden');
-            prepareQuizQuestions(); // Mengacak ulang 5 kumpulan soal baru dari master data
+            prepareQuizQuestions();
             loadQuestion();
         });
     </script>
