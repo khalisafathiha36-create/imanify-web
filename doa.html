@@ -36,7 +36,7 @@
 </head>
 <body class="overflow-x-hidden">
 
-   <nav class="glass-nav fixed top-0 left-0 right-0 z-50 py-4 px-6 md:px-12 flex justify-between items-center">
+    <nav class="glass-nav fixed top-0 left-0 right-0 z-50 py-4 px-6 md:px-12 flex justify-between items-center">
         <div class="flex items-center gap-2">
             <span class="text-2xl font-bold tracking-wider text-white">Iman<span class="text-[#D4AF37]">ify</span></span>
         </div>
@@ -88,7 +88,7 @@
             <button class="bg-[#0F766E] text-white border border-[#D4AF37]/40 px-4 py-1.5 rounded-full text-xs font-medium transition">⭐ Al-Matsurat</button>
             <button class="bg-white/5 text-gray-300 hover:bg-white/10 px-4 py-1.5 rounded-full text-xs font-medium transition">🏠 Doa Rumah Tangga</button>
             <button class="bg-white/5 text-gray-300 hover:bg-white/10 px-4 py-1.5 rounded-full text-xs font-medium transition">🎓 Doa Belajar</button>
-            <button class="bg-white/5 text-gray-300 hover:bg-white/10 px-4 py-1.5 rounded-full text-xs font-medium transition">🕌 Doa Shalat & Masjid</button>
+            <button class="bg-white/5 text-gray-300 hover:bg-white/10 px-4 py-1.5 rounded-full text-xs font-medium transition">¼ Doa Shalat & Masjid</button>
         </div>
     </section>
 
@@ -103,19 +103,17 @@
     </footer>
 
     <script>
-        // Check Login Satpam
-        const sesiAktif = localStorage.getItem('imanify_session');
-        if (!sesiAktif) { window.location.href = "login.html"; }
-
         // 1. Logika Menu Mobile
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
 
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
 
-       // 2. DATABASE KUMPULAN DOA LENGKAP IMANIFY + TAUTAN FILE AUDIO STABIL (CDN)
+        // 2. DATABASE KUMPULAN DOA LENGKAP IMANIFY
         const doaData = [
             // --- KATEGORI: AL-MATSURAT ---
             {
@@ -155,7 +153,7 @@
                 category: "rumah-tangga",
                 tag: "DOA RUMAH TANGGA (MOHON KELUARGA SAKINAH)",
                 colorClass: "bg-purple-500/10 text-purple-300",
-                arabic: "رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ وَاجْعَلْنَا لِلْمُtَّقِينَ إِمَامًا",
+                arabic: "رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ وَاجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا",
                 latin: "Rabbanā hab lanā min azwājinā wa żurriyyātinā qurrata a'yuniw-waj'alnā lil-muttaqīna imāmā.",
                 translation: "Ya Tuhan kami, anugerahkanlah kepada kami pasangan kami dan keturunan kami sebagai penyenang hati (kami), dan jadikanlah kami pemimpin bagi orang-orang yang bertakwa. (QS. Al-Furqan: 74)",
                 audioUrl: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/2929.mp3"
@@ -165,7 +163,7 @@
                 category: "rumah-tangga",
                 tag: "DOA RUMAH TANGGA (UNTUK KEDUA ORANG TUA)",
                 colorClass: "bg-purple-500/10 text-purple-300",
-                arabic: "رَبِّ اغْفِرْ لِيْ وَلِوَALِدَيَّ وَارْحَمْهُمَا كَمَا رَبَّيَانِيْ صَغِيْرًا",
+                arabic: "رَبِّ اغْفِرْ لِيْ وَلِوَالِدَيَّ وَارْحَمْهُمَا كَمَا رَبَّيَانِيْ صَغِيْرًا",
                 latin: "Rabbigfir lī wa li-wālidayya warḥamhumā kamā rabbayānī ṣagīrā.",
                 translation: "Ya Tuhanku, ampunilah dosaku dan dosa kedua orang tuaku, dan sayangilah keduanya sebagaimana mereka berdua telah mendidik aku pada waktu kecil.",
                 audioUrl: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/2053.mp3"
@@ -188,7 +186,7 @@
                 tag: "DOA SEBELUM BELAJAR",
                 colorClass: "bg-[#0F766E]/30 text-emerald-300",
                 arabic: "رَبِّ زِدْنِي عِلْمًا وَارْزُقْنِي فَهْمًا",
-                latin: "Rabbi zidni 'ilman warzuqni fahma.",
+                latin: "Rabbi ziadnī 'ilman warzuqnī fahmā.",
                 translation: "Ya Tuhanku, tambahkanlah kepadaku ilmu pengetahuan dan berilah aku pemahaman yang baik.",
                 audioUrl: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/2465.mp3"
             },
@@ -246,16 +244,15 @@
             }
         ];
 
-        // VARIABEL STATE UNTUK PENGATURAN AUDIO PLAYER GLOBAL
+        // VARIABEL STATE AUDIO PLAYER
         let currentAudio = null;
         let activeDoaId = null;
 
-        // 3. Logika Menampilkan Data Card Doa Dinamis
         const container = document.getElementById('doa-container');
         const categoryButtons = document.querySelectorAll('#filter-buttons button');
 
+        // 3. Logika Menampilkan Data Card Doa Dinamis
         function displayDoa(categoryFilter) {
-            // Matikan audio yang sedang berputar jika berganti kategori
             if (currentAudio) {
                 currentAudio.pause();
                 currentAudio = null;
@@ -269,7 +266,6 @@
                     const card = document.createElement('div');
                     card.className = "glass-card p-6 rounded-2xl relative overflow-hidden transition-all duration-300";
                     
-                    // Cek text status tombol audio yang sesuai status saat ini
                     const isPlaying = (activeDoaId === doa.id);
                     const labelTombol = isPlaying ? "⏸️ Jeda (Pause)" : "🎵 Play Audio";
                     const kelasWarnaTombol = isPlaying ? "text-[#D4AF37]" : "hover:text-[#D4AF37]";
@@ -294,11 +290,10 @@
             });
         }
 
-        // 4. FUNGSI LOGIKA AUDIO MEDIA PLAYER SELEKTIF (VERSI FIXED)
+        // 4. LOGIKA AUDIO MEDIA PLAYER
         function putarAudioDoa(id, url) {
             const targetBtn = document.getElementById(`btn-${id}`);
 
-            // A. Mengklik tombol yang sama saat audio sedang berputar (Lakukan Jeda/Pause)
             if (currentAudio && activeDoaId === id) {
                 if (!currentAudio.paused) {
                     currentAudio.pause();
@@ -313,7 +308,6 @@
                 return;
             }
 
-            // B. Mematikan audio lain jika ada doa berbeda yang sedang diputar
             if (currentAudio) {
                 currentAudio.pause();
                 const oldBtn = document.getElementById(`btn-${activeDoaId}`);
@@ -323,31 +317,24 @@
                 }
             }
 
-            // C. Menjalankan Objek Audio Baru dengan Penanganan Error Lebih Baik
             targetBtn.innerText = "⏳ Loading...";
             
-            // Menggunakan objek Audio HTML5 murni
             currentAudio = new Audio();
             currentAudio.src = url;
             currentAudio.preload = "auto";
             activeDoaId = id;
 
-            // Trigger play setelah audio siap
             currentAudio.play().then(() => {
                 targetBtn.innerText = "⏸️ Jeda (Pause)";
                 targetBtn.className = "text-xs font-semibold text-[#D4AF37] transition cursor-pointer flex items-center gap-1";
             }).catch(err => {
-                // Jika server quranicaudio memblokir, kita berikan fallback informasi ke user
                 targetBtn.innerText = "⚠️ Koneksi Error";
                 targetBtn.className = "text-xs font-semibold text-red-400 transition cursor-pointer flex items-center gap-1";
-                console.error("Audio play blocked or server down:", err);
-                
-                // Reset state agar bisa diklik ulang
+                console.error("Audio block/error:", err);
                 currentAudio = null;
                 activeDoaId = null;
             });
 
-            // Setel otomatis kembali semula jika durasi mengaji selesai
             currentAudio.addEventListener('ended', () => {
                 targetBtn.innerText = "🎵 Play Audio";
                 targetBtn.className = "text-xs font-semibold hover:text-[#D4AF37] transition cursor-pointer flex items-center gap-1";
@@ -356,7 +343,7 @@
             });
         }
 
-        // 5. Pengatur Event Handler Tombol Filter Kategori Utama
+        // 5. Event Handler Tombol Filter Kategori
         categoryButtons.forEach(btn => {
             btn.style.cursor = 'pointer'; 
             btn.addEventListener('click', () => {
@@ -373,14 +360,10 @@
             });
         });
 
-        // Jalankan default kategori awal saat halaman dibuka
+        // Load default kategori saat halaman dibuka
         window.addEventListener('DOMContentLoaded', () => {
             displayDoa("matsurat");
         });
     </script>
-   <script>
-    // Otomatis mencari dan menghapus semua tombol/menu yang mengarah ke login.html
-    document.querySelectorAll('a[href="login.html"]').forEach(el => el.remove());
-</script>
 </body>
 </html>
