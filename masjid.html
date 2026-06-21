@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cari Masjid Terdekat - Imanify</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0B1E1C;
+            color: #FFFFFF;
+        }
+        .glass-card {
+            background: rgba(15, 118, 110, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+        }
+        .glass-nav {
+            background: rgba(11, 30, 28, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <nav class="glass-nav fixed top-0 left-0 right-0 z-50 py-4 px-6 md:px-12 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <span class="text-2xl font-bold tracking-wider text-white">Iman<span class="text-[#D4AF37]">ify</span></span>
+        </div>
+
+        <div class="hidden xl:flex items-center gap-6 text-sm font-medium text-gray-300">
+            <a href="index.html" class="hover:text-[#D4AF37] transition">Home</a>
+            <a href="quran.html" class="hover:text-[#D4AF37] transition">Al-Qur'an</a>
+            <a href="shalat.html" class="hover:text-[#D4AF37] transition">Jadwal Shalat</a>
+            <a href="doa.html" class="hover:text-[#D4AF37] transition">Doa & Dzikir</a>
+            <a href="hadits.html" class="hover:text-[#D4AF37] transition">Hadits</a>
+            <a href="artikel.html" class="hover:text-[#D4AF37] transition">Artikel Islami</a>
+            <a href="tracker.html" class="hover:text-[#D4AF37] transition">Ibadah Tracker</a>
+            <a href="zakat.html" class="hover:text-[#D4AF37] transition">Zakat</a>
+            <a href="kalender.html" class="hover:text-[#D4AF37] transition">Kalender Hijriah</a>
+            <a href="masjid.html" class="text-[#D4AF37] hover:text-white transition">Masjid</a>
+            <a href="komunitas.html" class="hover:text-[#D4AF37] transition">Komunitas</a>
+            <a href="ai.html" class="hover:text-[#D4AF37] transition">Quiz Islami</a>
+        </div>
+
+        <div class="flex xl:hidden items-center">
+            <button id="menu-btn" class="text-white focus:outline-none p-2 bg-white/5 rounded-lg border border-white/10">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden absolute top-full left-0 right-0 bg-[#0B1E1C]/95 backdrop-blur-lg border-b border-[#D4AF37]/20 p-6 flex flex-col gap-4 text-sm font-medium text-gray-300 xl:hidden shadow-xl">
+            <a href="index.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Home</a>
+            <a href="quran.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Al-Qur'an</a>
+            <a href="shalat.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Jadwal Shalat</a>
+            <a href="doa.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Doa & Dzikir</a>
+            <a href="hadits.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Hadits</a>
+            <a href="artikel.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Artikel Islami</a>
+            <a href="tracker.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Ibadah Tracker</a>
+            <a href="zakat.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Zakat</a>
+            <a href="kalender.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Kalender Hijriah</a>
+            <a href="masjid.html" class="text-[#D4AF37] py-2 border-b border-white/5">Masjid</a>
+            <a href="komunitas.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Komunitas</a>
+            <a href="ai.html" class="hover:text-[#D4AF37] py-2">Quiz Islami</a>
+        </div>
+    </nav>
+
+    <main class="pt-32 pb-24 px-6 max-w-5xl mx-auto min-h-screen">
+        <div class="text-center mb-10">
+            <h1 class="text-3xl md:text-5xl font-bold mb-3">🕌 Cari <span class="text-[#D4AF37]">Masjid Terdekat</span></h1>
+            <p class="text-gray-400 text-xs md:text-sm max-w-md mx-auto">Temukan tempat ibadah terdekat di sekitar lokasimu untuk menunaikan shalat berjamaah tepat waktu.</p>
+        </div>
+
+        <div class="max-w-md mx-auto mb-10">
+            <div class="flex gap-2 bg-white/5 border border-white/10 p-2 rounded-xl focus-within:border-[#D4AF37] transition">
+                <input id="search-city" type="text" placeholder="Masukkan nama kota atau wilayah..." class="w-full bg-transparent px-3 py-1.5 text-xs md:text-sm focus:outline-none text-white" value="Sukabumi">
+                <button id="btn-search" class="bg-[#0F766E] text-white px-4 py-1.5 rounded-lg text-xs font-semibold hover:bg-[#115e56] transition">Cari</button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2 glass-card rounded-2xl overflow-hidden h-[350px] lg:h-[450px]">
+                <iframe 
+                    id="map-frame"
+                    class="w-full h-full border-0 grayscale invert opacity-80" 
+                    src="https://maps.google.com/maps?q=Masjid%20Agung%20Sukabumi&t=&z=15&ie=UTF-8&iwloc=&output=embed" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+
+            <div class="space-y-4">
+                <h2 class="text-sm font-bold tracking-wider text-[#D4AF37] uppercase mb-1">📍 Masjid Terdekat</h2>
+                
+                <div class="glass-card p-4 rounded-xl border border-white/5 hover:border-[#D4AF37]/40 transition cursor-pointer" onclick="updateMap('Masjid Agung Sukabumi')">
+                    <h3 class="text-xs md:text-sm font-bold text-white">Masjid Agung Sukabumi</h3>
+                    <p class="text-[11px] text-gray-400 mt-1">Jl. Alun-Alun Utara No.1, Gn. Parang</p>
+                    <div class="mt-2 flex gap-1.5 text-[10px] text-emerald-400 font-medium">
+                        <span>Parkir Luas</span> • <span>Mukena/Sarung</span>
+                    </div>
+                </div>
+
+                <div class="glass-card p-4 rounded-xl border border-white/5 hover:border-[#D4AF37]/40 transition cursor-pointer" onclick="updateMap('Masjid Raya Raudhatul Irfan')">
+                    <h3 class="text-xs md:text-sm font-bold text-white">Masjid Raudhatul Irfan</h3>
+                    <p class="text-[11px] text-gray-400 mt-1">Jl. Jalur Lingkar Selatan, Cisaat</p>
+                    <div class="mt-2 flex gap-1.5 text-[10px] text-emerald-400 font-medium">
+                        <span>Rest Area</span> • <span>Tempat Nyaman</span>
+                    </div>
+                </div>
+
+                <div class="glass-card p-4 rounded-xl border border-white/5 hover:border-[#D4AF37]/40 transition cursor-pointer" onclick="updateMap('Masjid Istiqlal Jakarta')">
+                    <h3 class="text-xs md:text-sm font-bold text-white">Masjid Istiqlal (Contoh Luar)</h3>
+                    <p class="text-[11px] text-gray-400 mt-1">Jl. Taman Wijaya Kusuma, Jakarta Pusat</p>
+                    <div class="mt-2 flex gap-1.5 text-[10px] text-purple-400 font-medium">
+                        <span>Ikonik</span> • <span>Sangat Luas</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="border-t border-gray-800 bg-[#071413] py-8 px-6 text-center text-xs tracking-wide text-gray-500">
+        <p class="mb-2">&copy; 2026 Imanify Platform. All rights reserved.</p>
+        <p class="font-medium text-gray-400">
+            Engineered with heart by <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#F3E5AB] font-semibold">Khalisa Fathiha Putri Kurnia</span>
+        </p>
+    </footer>
+
+    <script>
+        // Logika Mobile Menu Navbar
+const menuBtn = document.getElementById('menu-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+menuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+
+// DATABASE MASJID BERDASARKAN KOTA
+const dataMasjid = {
+    "sukabumi": [
+        { nama: "Masjid Agung Sukabumi", alamat: "Jl. Alun-Alun Utara No.1, Gn. Parang", fasilitas: "Parkir Luas • Mukena/Sarung" },
+        { nama: "Masjid Raya Raudhatul Irfan", alamat: "Jl. Jalur Lingkar Selatan, Cisaat", fasilitas: "Rest Area • Nyaman" }
+    ],
+    "jakarta": [
+        { nama: "Masjid Istiqlal", alamat: "Jl. Taman Wijaya Kusuma, Jakarta Pusat", fasilitas: "Ikonik • Sangat Luas" },
+        { nama: "Masjid Agung Al-Azhar", alamat: "Jl. Sisingamangaraja, Kebayoran Baru", fasilitas: "Area Teduh • Nyaman" }
+    ],
+    "bandung": [
+        { nama: "Masjid Raya Bandung", alamat: "Jl. Asia Afrika, Balonggede", fasilitas: "Alun-alun Rumput • Strategis" },
+        { nama: "Masjid Al-Jabbar", alamat: "Jl. Cimencrang No.14, Gedebage", fasilitas: "Masjid Terapung • Megah" }
+    ]
+};
+
+// Fungsi Mengubah Peta Lokasi Masjid (Sudah diperbaiki dari typo)
+function updateMap(query) {
+    const mapFrame = document.getElementById('map-frame');
+    mapFrame.src = "https://maps.google.com/maps?q=" + encodeURIComponent(query) + "&t=&z=15&ie=UTF-8&iwloc=&output=embed";
+}
+
+// Mengubah Daftar Rekomendasi di Semicircle/Samping Peta
+function updateRekomendasi(kota) {
+    const kotaKey = kota.toLowerCase().trim();
+    const container = document.querySelector('.space-y-4'); 
+    
+    const judul = '<h2 class="text-sm font-bold tracking-wider text-[#D4AF37] uppercase mb-1">📍 Masjid Terdekat</h2>';
+    
+    if (dataMasjid[kotaKey]) {
+        let listHtml = judul;
+        
+        dataMasjid[kotaKey].forEach(masjid => {
+            listHtml += `
+                <div class="glass-card p-4 rounded-xl border border-white/5 hover:border-[#D4AF37]/40 transition cursor-pointer" onclick="updateMap('${masjid.nama}')">
+                    <h3 class="text-xs md:text-sm font-bold text-white">${masjid.nama}</h3>
+                    <p class="text-[11px] text-gray-400 mt-1">${masjid.alamat}</p>
+                    <div class="mt-2 flex gap-1.5 text-[10px] text-emerald-400 font-medium">
+                        <span>${masjid.fasilitas}</span>
+                    </div>
+                </div>
+            `;
+        });
+        container.innerHTML = listHtml;
+    } else {
+        container.innerHTML = `
+            ${judul}
+            <div class="glass-card p-4 rounded-xl border border-white/5 bg-white/5">
+                <p class="text-xs text-gray-400 italic">
+                    Rekomendasi list untuk kota "${kota}" belum terdaftar, tapi peta di samping tetap melacak lokasi masjid terdekat di sana.
+                </p>
+            </div>
+        `;
+    }
+}
+
+// Logika Tombol Input Cari Manual
+document.getElementById('btn-search').addEventListener('click', () => {
+    const inputVal = document.getElementById('search-city').value;
+    if (inputVal.trim() !== "") {
+        updateMap("Masjid di " + inputVal);
+        updateRekomendasi(inputVal);
+    }
+});
+
+// Izinkan pencarian dengan menekan tombol "Enter" di keyboard
+document.getElementById('search-city').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        document.getElementById('btn-search').click();
+    }
+});
+
+// Set default saat halaman pertama dibuka
+window.addEventListener('DOMContentLoaded', () => {
+    updateRekomendasi("Sukabumi");
+    updateMap("Masjid Agung Sukabumi");
+});
+    </script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Al-Qur'an Digital - Imanify</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Amiri:ital@0;1&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0B1E1C; 
+            color: #FFFFFF;
+        }
+        .font-arabic {
+            font-family: 'Amiri', serif;
+        }
+        .glass-card {
+            background: rgba(15, 118, 110, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+        }
+        .glass-nav {
+            background: rgba(11, 30, 28, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <nav class="glass-nav fixed top-0 left-0 right-0 z-50 py-4 px-6 md:px-12 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <span class="text-2xl font-bold tracking-wider text-white">Iman<span class="text-[#D4AF37]">ify</span></span>
+        </div>
+
+        <div class="hidden xl:flex items-center gap-6 text-sm font-medium text-gray-300">
+            <a href="index.html" class="hover:text-[#D4AF37] transition">Home</a>
+            <a href="quran.html" class="text-[#D4AF37] hover:text-white transition">Al-Qur'an</a>
+            <a href="shalat.html" class="hover:text-[#D4AF37] transition">Jadwal Shalat</a>
+            <a href="doa.html" class="hover:text-[#D4AF37] transition">Doa & Dzikir</a>
+            <a href="hadits.html" class="hover:text-[#D4AF37] transition">Hadits</a>
+            <a href="artikel.html" class="hover:text-[#D4AF37] transition">Artikel Islami</a>
+            <a href="tracker.html" class="hover:text-[#D4AF37] transition">Ibadah Tracker</a>
+            <a href="zakat.html" class="hover:text-[#D4AF37] transition">Zakat</a>
+            <a href="kalender.html" class="hover:text-[#D4AF37] transition">Kalender Hijriah</a>
+            <a href="masjid.html" class="hover:text-[#D4AF37] transition">Masjid</a>
+            <a href="komunitas.html" class="hover:text-[#D4AF37] transition">Komunitas</a>
+            <a href="ai.html" class="hover:text-[#D4AF37] transition">Quiz Islami</a>
+        </div>
+
+        <div class="flex xl:hidden items-center">
+            <button id="menu-btn" class="text-white focus:outline-none p-2 bg-white/5 rounded-lg border border-white/10">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden absolute top-full left-0 right-0 bg-[#0B1E1C]/95 backdrop-blur-lg border-b border-[#D4AF37]/20 p-6 flex flex-col gap-4 text-sm font-medium text-gray-300 xl:hidden shadow-xl">
+            <a href="index.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Home</a>
+            <a href="quran.html" class="text-[#D4AF37] py-2 border-b border-white/5">Al-Qur'an</a>
+            <a href="shalat.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Jadwal Shalat</a>
+            <a href="doa.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Doa & Dzikir</a>
+            <a href="hadits.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Hadits</a>
+            <a href="artikel.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Artikel Islami</a>
+            <a href="tracker.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Ibadah Tracker</a>
+            <a href="zakat.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Zakat</a>
+            <a href="kalender.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Kalender Hijriah</a>
+            <a href="masjid.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Masjid</a>
+            <a href="komunitas.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Komunitas</a>
+            <a href="ai.html" class="hover:text-[#D4AF37] py-2">Quiz Islami</a>
+        </div>
+    </nav>
+
+    <section class="pt-32 pb-10 px-6 max-w-7xl mx-auto text-center">
+        <h1 class="text-3xl md:text-5xl font-bold mb-4">Al-Qur'an <span class="text-[#D4AF37]">Digital Premium</span></h1>
+        <p class="text-gray-400 text-sm md:text-base max-w-md mx-auto mb-8">Bacalah bimbingan suci penyejuk hati kapan saja dan di mana saja.</p>
+        
+        <div class="max-w-xl mx-auto flex gap-3 bg-white/5 border border-white/10 p-2 rounded-2xl focus-within:border-[#D4AF37] transition">
+            <input id="search-input" type="text" placeholder="Cari nama surah... (Contoh: Al-Baqarah)" class="w-full bg-transparent px-4 py-2 text-sm focus:outline-none text-white">
+        </div>
+    </section>
+
+    <section class="px-6 md:px-12 max-w-7xl mx-auto pb-24">
+        <div id="container-quran" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <p class="text-sm text-gray-400 text-center col-span-full py-10 animate-pulse">Memuat data 114 Surah...</p>
+        </div>
+    </section>
+
+    <footer class="border-t border-gray-800 bg-[#071413] py-8 px-6 text-center text-xs tracking-wide text-gray-500">
+        <p class="mb-2">&copy; 2026 Imanify Platform. All rights reserved.</p>
+        <p class="font-medium text-gray-400">
+            Engineered with heart by <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#F3E5AB] font-semibold">Khalisa Fathiha Putri Kurnia</span>
+        </p>
+    </footer>
+
+    <script>
+        // Hamburger Menu
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Variabel Audio & Data global
+        let audioPlayer = new Audio();
+        let suratSedangDiputar = null;
+        let masterDataSurat = [];
+
+        // Fungsi Load data surat dari API
+        async function fetchSurat() {
+            const container = document.getElementById('container-quran');
+            try {
+                const res = await fetch('https://equran.id/api/v2/surat');
+                const json = await res.json();
+                
+                if (json.code === 200) {
+                    masterDataSurat = json.data;
+                    renderSurat(masterDataSurat);
+                }
+            } catch (err) {
+                console.error(err);
+                if(container) container.innerHTML = `<p class="text-xs text-gray-400 text-center col-span-full">Gagal memuat. Pastikan internet aktif.</p>`;
+            }
+        }
+
+        // Fungsi Render List HTML
+        function renderSurat(listSurat) {
+            const container = document.getElementById('container-quran');
+            if(!container) return;
+            container.innerHTML = '';
+
+            if(listSurat.length === 0) {
+                container.innerHTML = `<p class="text-xs text-gray-400 text-center col-span-full py-10">Surah tidak ditemukan.</p>`;
+                return;
+            }
+
+            listSurat.forEach(surat => {
+                const card = document.createElement('div');
+                card.className = "glass-card p-5 rounded-2xl flex justify-between items-center hover:border-[#D4AF37] transition cursor-pointer group";
+                
+                card.innerHTML = `
+                    <div class="flex items-center gap-4">
+                        <div id="icon-${surat.nomor}" class="w-10 h-10 bg-[#0F766E]/20 text-[#D4AF37] font-bold text-sm rounded-xl flex items-center justify-center group-hover:bg-[#0F766E] group-hover:text-white transition">
+                            ${surat.nomor}
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-sm text-white group-hover:text-[#D4AF37] transition">${surat.namaLatin}</h3>
+                            <p class="text-[11px] text-gray-400 mt-0.5">${surat.arti} • ${surat.jumlahAyat} Ayat</p>
+                            <span id="status-${surat.nomor}" class="text-[10px] text-emerald-400 hidden mt-0.5 animate-pulse">▶ Memutar Murottal...</span>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <span class="font-arabic text-xl text-[#D4AF37]">${surat.nama}</span>
+                    </div>
+                `;
+
+                // Logika klik putar audio per surah
+                // GANTI LOGIKA KLIK KARTU DI quran.html MENJADI SEPERTI INI:
+card.addEventListener('click', () => {
+    // Berpindah ke halaman baca.html sambil membawa nomor surah yang diklik
+    window.location.href = `baca.html?surah=${surat.nomor}`;
+});
+
+                container.appendChild(card);
+            });
+        }
+
+        function updateTampilanPutar(nomor) {
+            const txt = document.getElementById(`status-${nomor}`);
+            const ico = document.getElementById(`icon-${nomor}`);
+            if (txt) txt.classList.remove('hidden');
+            if (ico) {
+                ico.innerHTML = "♫";
+                ico.className = "w-10 h-10 bg-[#D4AF37] text-[#0B1E1C] font-bold text-sm rounded-xl flex items-center justify-center";
+            }
+        }
+
+        function updateTampilanPause(nomor) {
+            const txt = document.getElementById(`status-${nomor}`);
+            const ico = document.getElementById(`icon-${nomor}`);
+            if (txt) txt.classList.add('hidden');
+            if (ico) {
+                ico.innerHTML = nomor;
+                ico.className = "w-10 h-10 bg-[#0F766E]/20 text-[#D4AF37] font-bold text-sm rounded-xl flex items-center justify-center";
+            }
+        }
+
+        // Jalankan pencarian dinamis saat mengetik nama surah
+        document.getElementById('search-input').addEventListener('input', (e) => {
+            const keyword = e.target.value.toLowerCase();
+            const hasilFilter = masterDataSurat.filter(s => s.namaLatin.toLowerCase().includes(keyword));
+            renderSurat(hasilFilter);
+        });
+
+        audioPlayer.addEventListener('ended', () => {
+            if (suratSedangDiputar !== null) {
+                updateTampilanPause(suratSedangDiputar);
+                suratSedangDiputar = null;
+            }
+        });
+
+        window.addEventListener('DOMContentLoaded', fetchSurat);
+    </script>
+</body>
+</html>

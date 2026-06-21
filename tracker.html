@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ibadah Tracker - Imanify</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0B1E1C;
+            color: #FFFFFF;
+        }
+        .glass-card {
+            background: rgba(15, 118, 110, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+        }
+        .glass-nav {
+            background: rgba(11, 30, 28, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <nav class="glass-nav fixed top-0 left-0 right-0 z-50 py-4 px-6 md:px-12 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <span class="text-2xl font-bold tracking-wider text-white">Iman<span class="text-[#D4AF37]">ify</span></span>
+        </div>
+
+        <div class="hidden xl:flex items-center gap-6 text-sm font-medium text-gray-300">
+            <a href="index.html" class="hover:text-[#D4AF37] transition">Home</a>
+            <a href="quran.html" class="hover:text-[#D4AF37] transition">Al-Qur'an</a>
+            <a href="shalat.html" class="hover:text-[#D4AF37] transition">Jadwal Shalat</a>
+            <a href="doa.html" class="hover:text-[#D4AF37] transition">Doa & Dzikir</a>
+            <a href="hadits.html" class="hover:text-[#D4AF37] transition">Hadits</a>
+            <a href="artikel.html" class="hover:text-[#D4AF37] transition">Artikel Islami</a>
+            <a href="tracker.html" class="text-[#D4AF37] hover:text-white transition">Ibadah Tracker</a>
+            <a href="zakat.html" class="hover:text-[#D4AF37] transition">Zakat</a>
+            <a href="kalender.html" class="hover:text-[#D4AF37] transition">Kalender Hijriah</a>
+            <a href="masjid.html" class="hover:text-[#D4AF37] transition">Masjid</a>
+            <a href="komunitas.html" class="hover:text-[#D4AF37] transition">Komunitas</a>
+            <a href="ai.html" class="hover:text-[#D4AF37] transition">Quiz Islami</a>
+        </div>
+
+        <div class="flex xl:hidden items-center">
+            <button id="menu-btn" class="text-white focus:outline-none p-2 bg-white/5 rounded-lg border border-white/10">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden absolute top-full left-0 right-0 bg-[#0B1E1C]/95 backdrop-blur-lg border-b border-[#D4AF37]/20 p-6 flex flex-col gap-4 text-sm font-medium text-gray-300 xl:hidden shadow-xl">
+            <a href="index.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Home</a>
+            <a href="quran.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Al-Qur'an</a>
+            <a href="shalat.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Jadwal Shalat</a>
+            <a href="doa.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Doa & Dzikir</a>
+            <a href="hadits.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Hadits</a>
+            <a href="artikel.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Artikel Islami</a>
+            <a href="tracker.html" class="text-[#D4AF37] py-2 border-b border-white/5">Ibadah Tracker</a>
+            <a href="zakat.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Zakat</a>
+            <a href="kalender.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Kalender Hijriah</a>
+            <a href="masjid.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Masjid</a>
+            <a href="komunitas.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Komunitas</a>
+            <a href="ai.html" class="hover:text-[#D4AF37] py-2">Quiz Islami</a>
+        </div>
+    </nav>
+
+    <main class="pt-32 pb-24 px-6 max-w-3xl mx-auto min-h-screen">
+        <div class="text-center mb-10">
+            <h1 class="text-3xl md:text-5xl font-bold mb-3">📈 Mutaba'ah <span class="text-[#D4AF37]">Yauumiyah</span></h1>
+            <p class="text-gray-400 text-xs md:text-sm max-w-md mx-auto">Evaluasi dan catat perkembangan ibadah harianmu secara mandiri untuk menjaga konsistensi iman.</p>
+        </div>
+
+        <div class="glass-card rounded-2xl p-6 mb-8 border border-[#D4AF37]/30">
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-gray-300">Target Progres Hari Ini</span>
+                <span id="progress-percent" class="text-sm font-bold text-[#D4AF37]">0%</span>
+            </div>
+            <div class="w-full bg-white/5 rounded-full h-3 overflow-hidden border border-white/5">
+                <div id="progress-bar" class="bg-gradient-to-r from-[#0F766E] to-[#D4AF37] h-full w-[0%] transition-all duration-500 rounded-full"></div>
+            </div>
+            <p id="motivate-text" class="text-[11px] text-gray-400 italic mt-3 text-center">"Semangat! Yuk mulai centang ibadah yang sudah kamu selesaikan hari ini."</p>
+        </div>
+
+        <div class="space-y-4">
+            
+            <div class="glass-card p-5 rounded-2xl">
+                <h3 class="text-xs font-bold text-[#D4AF37] tracking-wider uppercase mb-4 flex items-center gap-1.5">🧎‍♂️ Shalat Fardhu (Wajib)</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+                    <label class="flex items-center gap-2 bg-white/5 p-2 rounded-xl border border-white/5 cursor-pointer hover:border-white/20 transition text-xs">
+                        <input type="checkbox" class="tracker-checkbox accent-[#0F766E] w-4 h-4"> Subuh
+                    </label>
+                    <label class="flex items-center gap-2 bg-white/5 p-2 rounded-xl border border-white/5 cursor-pointer hover:border-white/20 transition text-xs">
+                        <input type="checkbox" class="tracker-checkbox accent-[#0F766E] w-4 h-4"> Dzuhur
+                    </label>
+                    <label class="flex items-center gap-2 bg-white/5 p-2 rounded-xl border border-white/5 cursor-pointer hover:border-white/20 transition text-xs">
+                        <input type="checkbox" class="tracker-checkbox accent-[#0F766E] w-4 h-4"> Ashar
+                    </label>
+                    <label class="flex items-center gap-2 bg-white/5 p-2 rounded-xl border border-white/5 cursor-pointer hover:border-white/20 transition text-xs">
+                        <input type="checkbox" class="tracker-checkbox accent-[#0F766E] w-4 h-4"> Maghrib
+                    </label>
+                    <label class="flex items-center gap-2 bg-white/5 p-2 rounded-xl border border-white/5 cursor-pointer hover:border-white/20 transition text-xs">
+                        <input type="checkbox" class="tracker-checkbox accent-[#0F766E] w-4 h-4"> Isya
+                    </label>
+                </div>
+            </div>
+
+            <div class="glass-card p-5 rounded-2xl">
+                <h3 class="text-xs font-bold text-purple-300 tracking-wider uppercase mb-4 flex items-center gap-1.5">✨ Dzikir & Sunnah</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <label class="flex items-center gap-3 bg-white/5 p-3 rounded-xl border border-white/5 cursor-pointer hover:border-white/20 transition text-xs">
+                        <input type="checkbox" class="tracker-checkbox accent-[#0F766E] w-4 h-4"> Dzikir Pagi (Al-Matsurat)
+                    </label>
+                    <label class="flex items-center gap-3 bg-white/5 p-3 rounded-xl border border-white/5 cursor-pointer hover:border-white/20 transition text-xs">
+                        <input type="checkbox" class="tracker-checkbox accent-[#0F766E] w-4 h-4"> Dzikir Petang (Al-Matsurat)
+                    </label>
+                    <label class="flex items-center gap-3 bg-white/5 p-3 rounded-xl border border-white/5 cursor-pointer hover:border-white/20 transition text-xs">
+                        <input type="checkbox" class="tracker-checkbox accent-[#0F766E] w-4 h-4"> Shalat Sunnah Rawatib
+                    </label>
+                    <label class="flex items-center gap-3 bg-white/5 p-3 rounded-xl border border-white/5 cursor-pointer hover:border-white/20 transition text-xs">
+                        <input type="checkbox" class="tracker-checkbox accent-[#0F766E] w-4 h-4"> Shalat Duha / Tahajjud
+                    </label>
+                </div>
+            </div>
+
+            <div class="glass-card p-5 rounded-2xl">
+                <h3 class="text-xs font-bold text-emerald-300 tracking-wider uppercase mb-4 flex items-center gap-1.5">📖 Al-Qur'an & Shaum</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <label class="flex items-center gap-3 bg-white/5 p-3 rounded-xl border border-white/5 cursor-pointer hover:border-white/20 transition text-xs">
+                        <input type="checkbox" class="tracker-checkbox accent-[#0F766E] w-4 h-4"> Membaca Al-Qur'an (Minimal 1 Ruku/Lembar)
+                    </label>
+                    <label class="flex items-center gap-3 bg-white/5 p-3 rounded-xl border border-white/5 cursor-pointer hover:border-white/20 transition text-xs">
+                        <input type="checkbox" class="tracker-checkbox accent-[#0F766E] w-4 h-4"> Puasa Sunnah (Senin-Kamis / Ayyamul Bidh)
+                    </label>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="border-t border-gray-800 bg-[#071413] py-8 px-6 text-center text-xs tracking-wide text-gray-500">
+        <p class="mb-2">&copy; 2026 Imanify Platform. All rights reserved.</p>
+        <p class="font-medium text-gray-400">
+            Engineered with heart by <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#F3E5AB] font-semibold">Khalisa Fathiha Putri Kurnia</span>
+        </p>
+    </footer>
+
+    <script>
+        // Logika Navigasi Hamburger Mobile Menu
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+
+        // Logika Penghitungan Live Persentase Tracker
+        const checkboxes = document.querySelectorAll('.tracker-checkbox');
+        const progressBar = document.getElementById('progress-bar');
+        const progressPercent = document.getElementById('progress-percent');
+        const motivateText = document.getElementById('motivate-text');
+
+        function updateProgress() {
+            const total = checkboxes.length;
+            let checkedCount = 0;
+
+            checkboxes.forEach(box => {
+                if (box.checked) checkedCount++;
+            });
+
+            // Hitung bulat persentase progres
+            const percentage = Math.round((checkedCount / total) * 100);
+
+            // Update UI Tampilan bar
+            progressBar.style.width = `${percentage}%`;
+            progressPercent.innerText = `${percentage}%`;
+
+            // Ubah teks kalimat motivasi berdasarkan persentase capaian amalan
+            if (percentage === 0) {
+                motivateText.innerText = '"Semangat! Yuk mulai centang ibadah yang sudah kamu selesaikan hari ini."';
+            } else if (percentage > 0 && percentage < 50) {
+                motivateText.innerText = '"Bagus! Langkah awal yang baik, pertahankan dan tambah lagi amalanmu."';
+            } else if (percentage >= 50 && percentage < 100) {
+                motivateText.innerText = '"Luar biasa! Sedikit lagi target amalan harianmu tercapai sepenuhnya hari ini."';
+            } else if (percentage === 100) {
+                motivateText.innerText = '"Masya Allah! Alhamdulillah seluruh amalan target hari ini tuntas terisi. Istiqamah selalu!"';
+            }
+        }
+
+        // Tambahkan event listener di setiap checkbox ketika statusnya berubah klik
+        checkboxes.forEach(box => {
+            box.addEventListener('change', updateProgress);
+        });
+    </script>
+</body>
+</html>

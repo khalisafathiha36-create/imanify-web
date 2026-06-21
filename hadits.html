@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hadits Pilihan - Imanify</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Amiri:ital@0;1&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0B1E1C;
+            color: #FFFFFF;
+        }
+        .font-arabic {
+            font-family: 'Amiri', serif;
+        }
+        .glass-card {
+            background: rgba(15, 118, 110, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+        }
+        .glass-nav {
+            background: rgba(11, 30, 28, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <nav class="glass-nav fixed top-0 left-0 right-0 z-50 py-4 px-6 md:px-12 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <span class="text-2xl font-bold tracking-wider text-white">Iman<span class="text-[#D4AF37]">ify</span></span>
+        </div>
+
+        <div class="hidden xl:flex items-center gap-6 text-sm font-medium text-gray-300">
+            <a href="index.html" class="hover:text-[#D4AF37] transition">Home</a>
+            <a href="quran.html" class="hover:text-[#D4AF37] transition">Al-Qur'an</a>
+            <a href="shalat.html" class="hover:text-[#D4AF37] transition">Jadwal Shalat</a>
+            <a href="doa.html" class="hover:text-[#D4AF37] transition">Doa & Dzikir</a>
+            <a href="hadits.html" class="text-[#D4AF37] hover:text-white transition">Hadits</a>
+            <a href="artikel.html" class="hover:text-[#D4AF37] transition">Artikel Islami</a>
+            <a href="tracker.html" class="hover:text-[#D4AF37] transition">Ibadah Tracker</a>
+            <a href="zakat.html" class="hover:text-[#D4AF37] transition">Zakat</a>
+            <a href="kalender.html" class="hover:text-[#D4AF37] transition">Kalender Hijriah</a>
+            <a href="masjid.html" class="hover:text-[#D4AF37] transition">Masjid</a>
+            <a href="komunitas.html" class="hover:text-[#D4AF37] transition">Komunitas</a>
+            <a href="ai.html" class="hover:text-[#D4AF37] transition">Quiz Islami</a>
+        </div>
+
+        <div class="flex xl:hidden items-center">
+            <button id="menu-btn" class="text-white focus:outline-none p-2 bg-white/5 rounded-lg border border-white/10">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden absolute top-full left-0 right-0 bg-[#0B1E1C]/95 backdrop-blur-lg border-b border-[#D4AF37]/20 p-6 flex flex-col gap-4 text-sm font-medium text-gray-300 xl:hidden shadow-xl">
+            <a href="index.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Home</a>
+            <a href="quran.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Al-Qur'an</a>
+            <a href="shalat.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Jadwal Shalat</a>
+            <a href="doa.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Doa & Dzikir</a>
+            <a href="hadits.html" class="text-[#D4AF37] py-2 border-b border-white/5">Hadits</a>
+            <a href="artikel.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Artikel Islami</a>
+            <a href="tracker.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Ibadah Tracker</a>
+            <a href="zakat.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Zakat</a>
+            <a href="kalender.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Kalender Hijriah</a>
+            <a href="masjid.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Masjid</a>
+            <a href="komunitas.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Komunitas</a>
+            <a href="ai.html" class="hover:text-[#D4AF37] py-2">Quiz Islami</a>
+        </div>
+    </nav>
+
+    <section class="pt-32 pb-10 px-6 max-w-7xl mx-auto text-center">
+        <h1 class="text-3xl md:text-5xl font-bold mb-4">Hadits Pilihan <span class="text-[#D4AF37]">Arbain & Adab</span></h1>
+        <p class="text-gray-400 text-sm md:text-base max-w-md mx-auto mb-8">Kumpulan sabda Rasulullah ﷺ seputar tuntunan hidup, akhlak mulia, dan pondasi dasar agama Islam.</p>
+        
+        <div id="filter-buttons" class="flex flex-wrap justify-center gap-2 max-w-2xl mx-auto">
+            <button class="bg-[#0F766E] text-white border border-[#D4AF37]/40 px-4 py-1.5 rounded-full text-xs font-medium transition">❤️ Niat & Iman</button>
+            <button class="bg-white/5 text-gray-300 hover:bg-white/10 px-4 py-1.5 rounded-full text-xs font-medium transition">🌸 Akhlak & Adab</button>
+            <button class="bg-white/5 text-gray-300 hover:bg-white/10 px-4 py-1.5 rounded-full text-xs font-medium transition">📚 Ilmu & Amal</button>
+            <button class="bg-white/5 text-gray-300 hover:bg-white/10 px-4 py-1.5 rounded-full text-xs font-medium transition">✨ Kebersihan</button>
+        </div>
+    </section>
+
+    <section id="hadits-container" class="px-6 md:px-12 max-w-4xl mx-auto pb-24 space-y-6">
+        </section>
+
+    <footer class="border-t border-gray-800 bg-[#071413] py-8 px-6 text-center text-xs tracking-wide text-gray-500">
+        <p class="mb-2">&copy; 2026 Imanify Platform. All rights reserved.</p>
+        <p class="font-medium text-gray-400">
+            Engineered with heart by <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#F3E5AB] font-semibold">Khalisa Fathiha Putri Kurnia</span>
+        </p>
+    </footer>
+
+    <script>
+        // Logika Menu Mobile Hamburger
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // DATABASE HADITS SHAHIH PILIHAN
+        const haditsData = [
+            // --- KATEGORI: NIAT & IMAN ---
+            {
+                category: "niat",
+                tag: "HADITS TENTANG NIAT",
+                colorClass: "bg-[#D4AF37]/10 text-[#D4AF37]",
+                arabic: "إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى",
+                latin: "Innamal-a'maalu bin-niyyaat, wa innamaa likullimri-im maa nawaa.",
+                translation: "Sesungguhnya segala perbuatan itu bergantung pada niatnya, dan setiap orang akan mendapatkan apa yang ia niatkan. (HR. Bukhari & Muslim)"
+            },
+            {
+                category: "niat",
+                tag: "HADITS JALUR MASUK SURGA",
+                colorClass: "bg-[#D4AF37]/10 text-[#D4AF37]",
+                arabic: "مَنْ قَالَ رَضِيتُ بِاللَّهِ رَبًّا وَبِالإِسْلاَمِ دِينًا وَبِمُحَمَّدٍ رَسُولاً وَجَبَتْ لَهُ الْجَنَّةُ",
+                latin: "Man qaala radhiitu billahi rabban wa bil-islaami diinan wa bi muhammadin rasuulan wajabat lahul-jannah.",
+                translation: "Barangsiapa yang mengucapkan: 'Aku ridha Allah sebagai Tuhanku, Islam sebagai agamaku, dan Muhammad sebagai Rasul', maka wajib baginya masuk surga. (HR. Abu Dawud)"
+            },
+
+            // --- KATEGORI: AKHLAK & ADAB ---
+            {
+                category: "akhlak",
+                tag: "HADITS PERKATAAN BAIK",
+                colorClass: "bg-purple-500/10 text-purple-300",
+                arabic: "مَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الآخِرِ فَلْيَقُلْ خَيْرًا أَوْ لِيَصْمُتْ",
+                latin: "Man kaana yu'minu billahi wal-yaumil-aakhiri falyaqul khairan au liyasmut.",
+                translation: "Barangsiapa yang beriman kepada Allah dan hari akhir, maka hendaklah ia berkata baik atau (jika tidak bisa) hendaklah ia diam. (HR. Bukhari)"
+            },
+            {
+                category: "akhlak",
+                tag: "HADITS LARANGAN MARAH",
+                colorClass: "bg-purple-500/10 text-purple-300",
+                arabic: "لَا تَغْضَبْ وَلَكَ الْجَنَّةُ",
+                latin: "Laa taghdhab wa lakal-jannah.",
+                translation: "Janganlah engkau marah, maka bagimu surga. (HR. Thabrani)"
+            },
+            {
+                category: "akhlak",
+                tag: "HADITS MENJAGA LISAN & TANGAN",
+                colorClass: "bg-purple-500/10 text-purple-300",
+                arabic: "الْمُسْلِمُ مَنْ سَلِمَ الْمُسْلِمُونَ مِنْ لِسَانِهِ وَيَدِهِ",
+                latin: "Al-muslimu man salimal-muslimuuna min lisaanihi wa yadih.",
+                translation: "Seorang muslim yang sejati adalah orang yang membuat orang-orang muslim lainnya selamat dari gangguan lisan dan tangannya. (HR. Bukhari)"
+            },
+
+            // --- KATEGORI: ILMU & AMAL ---
+            {
+                category: "ilmu",
+                tag: "HADITS MENUNTUT ILMU",
+                colorClass: "bg-emerald-500/10 text-emerald-300",
+                arabic: "طَلَبُ الْعِلْمِ فَرِيضَةٌ عَلَى كُلِّ مُسْلِمٍ",
+                latin: "Thalabul-'ilmi fariidhatun 'alaa kulli muslim.",
+                translation: "Menuntut ilmu itu hukumnya wajib bagi setiap orang muslim. (HR. Ibnu Majah)"
+            },
+            {
+                category: "ilmu",
+                tag: "HADITS KEMUDAHAN JALAN SURGA",
+                colorClass: "bg-emerald-500/10 text-emerald-300",
+                arabic: "مَنْ سَلَكَ طَرِيقًا يَلْتَمِسُ فِيهِ عِلْمًا سَهَّلَ اللَّهُ لَهُ بِهِ طَرِيقًا إِلَى الْجَنَّةِ",
+                latin: "Man salaka thariiqa l-yaltamisu fiihi 'ilman sahhalallaahu lahu bihi thariiqan ilal-jannah.",
+                translation: "Barangsiapa menempuh suatu jalan untuk mencari ilmu, maka Allah akan memudahkan baginya jalan menuju surga. (HR. Muslim)"
+            },
+
+            // --- KATEGORI: KEBERSIHAN ---
+            {
+                category: "kebersihan",
+                tag: "HADITS KESUCIAN / WUDHU",
+                colorClass: "bg-blue-500/10 text-blue-300",
+                arabic: "الطُّهُورُ شَطْرُ الإِيمَانِ",
+                latin: "Ath-thuhuuru syathrul-iimaan.",
+                translation: "Kesucian (bersuci/wudhu) itu adalah setengah dari keimanan. (HR. Muslim)"
+            }
+        ];
+
+        // Logika Render & Filter Kartu Hadits
+        const container = document.getElementById('hadits-container');
+        const categoryButtons = document.querySelectorAll('#filter-buttons button');
+
+        function displayHadits(categoryFilter) {
+            container.innerHTML = ""; 
+            
+            haditsData.forEach(hadits => {
+                if (hadits.category === categoryFilter) {
+                    const card = document.createElement('div');
+                    card.className = "glass-card p-6 rounded-2xl relative overflow-hidden transition-all duration-300 hover:border-[#D4AF37]/40";
+                    card.innerHTML = `
+                        <div class="flex justify-between items-center mb-4 border-b border-white/5 pb-3">
+                            <span class="text-xs ${hadits.colorClass} px-2.5 py-1 rounded-md font-semibold tracking-wide">${hadits.tag}</span>
+                            <span class="text-xs text-gray-500 font-medium">Shahih</span>
+                        </div>
+                        <div class="text-right py-4">
+                            <p class="font-arabic text-xl md:text-2xl leading-loose text-white tracking-wide" dir="rtl">${hadits.arabic}</p>
+                        </div>
+                        <div class="mt-4 space-y-2 border-t border-white/5 pt-4">
+                            <p class="text-xs italic text-emerald-400 font-medium">"${hadits.latin}"</p>
+                            <p class="text-xs text-gray-300 leading-relaxed"><span class="text-[#D4AF37] font-medium">Terjemahan:</span> "${hadits.translation}"</p>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                }
+            });
+        }
+
+        // Jalankan Efek Klik Aktif di Tombol Kategori
+        categoryButtons.forEach(btn => {
+            btn.style.cursor = 'pointer'; 
+            btn.addEventListener('click', () => {
+                categoryButtons.forEach(b => {
+                    b.className = "bg-white/5 text-gray-300 hover:bg-white/10 px-4 py-1.5 rounded-full text-xs font-medium transition";
+                });
+                btn.className = "bg-[#0F766E] text-white border border-[#D4AF37]/40 px-4 py-1.5 rounded-full text-xs font-medium";
+
+                const text = btn.innerText.toLowerCase();
+                if (text.includes("niat")) displayHadits("niat");
+                else if (text.includes("akhlak")) displayHadits("akhlak");
+                else if (text.includes("ilmu")) displayHadits("ilmu");
+                else if (text.includes("kebersihan")) displayHadits("kebersihan");
+            });
+        });
+
+        // Setel kategori pertama (Niat & Iman) sebagai tampilan utama
+        window.addEventListener('DOMContentLoaded', () => {
+            displayHadits("niat");
+        });
+    </script>
+</body>
+</html>

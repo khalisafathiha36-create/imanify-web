@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imanify - Modern Islamic Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Amiri:ital@0;1&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0B1E1C; 
+            color: #FFFFFF;
+        }
+        .font-arabic {
+            font-family: 'Amiri', serif;
+        }
+        .glass-card {
+            background: rgba(15, 118, 110, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+        }
+        .glass-nav {
+            background: rgba(11, 30, 28, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <nav class="glass-nav fixed top-0 left-0 right-0 z-50 py-4 px-6 md:px-12 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <span class="text-2xl font-bold tracking-wider text-white">Iman<span class="text-[#D4AF37]">ify</span></span>
+        </div>
+
+        <div class="hidden xl:flex items-center gap-6 text-sm font-medium text-gray-300">
+            <a href="index.html" class="text-[#D4AF37] hover:text-white transition">Home</a>
+            <a href="quran.html" class="hover:text-[#D4AF37] transition">Al-Qur'an</a>
+            <a href="shalat.html" class="hover:text-[#D4AF37] transition">Jadwal Shalat</a>
+            <a href="doa.html" class="hover:text-[#D4AF37] transition">Doa & Dzikir</a>
+            <a href="hadits.html" class="hover:text-[#D4AF37] transition">Hadits</a>
+            <a href="artikel.html" class="hover:text-[#D4AF37] transition">Artikel Islami</a>
+            <a href="tracker.html" class="hover:text-[#D4AF37] transition">Ibadah Tracker</a>
+            <a href="zakat.html" class="hover:text-[#D4AF37] transition">Zakat</a>
+            <a href="kalender.html" class="hover:text-[#D4AF37] transition">Kalender Hijriah</a>
+            <a href="masjid.html" class="hover:text-[#D4AF37] transition">Masjid</a>
+            <a href="komunitas.html" class="hover:text-[#D4AF37] transition">Komunitas</a>
+            <a href="ai.html" class="hover:text-[#D4AF37] transition">Quiz Islami</a>
+        </div>
+
+        <div class="flex xl:hidden items-center">
+            <button id="menu-btn" class="text-white focus:outline-none p-2 bg-white/5 rounded-lg border border-white/10">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden absolute top-full left-0 right-0 bg-[#0B1E1C]/95 backdrop-blur-lg border-b border-[#D4AF37]/20 p-6 flex flex-col gap-4 text-sm font-medium text-gray-300 xl:hidden shadow-xl">
+            <a href="index.html" class="text-[#D4AF37] py-2 border-b border-white/5">Home</a>
+            <a href="quran.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Al-Qur'an</a>
+            <a href="shalat.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Jadwal Shalat</a>
+            <a href="doa.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Doa & Dzikir</a>
+            <a href="hadits.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Hadits</a>
+            <a href="artikel.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Artikel Islami</a>
+            <a href="tracker.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Ibadah Tracker</a>
+            <a href="zakat.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Zakat</a>
+            <a href="kalender.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Kalender Hijriah</a>
+            <a href="masjid.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Masjid</a>
+            <a href="komunitas.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Komunitas</a>
+            <a href="ai.html" class="hover:text-[#D4AF37] py-2">Quiz Islami</a>
+        </div>
+    </nav>
+
+    <section class="relative pt-32 pb-20 px-6 md:px-12 max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 min-h-screen">
+        <div class="absolute top-20 right-0 w-72 h-72 bg-[#0F766E]/10 rounded-full blur-3xl -z-10"></div>
+        <div class="absolute bottom-10 left-10 w-96 h-96 bg-[#D4AF37]/5 rounded-full blur-3xl -z-10"></div>
+
+        <div class="flex-1 text-center lg:text-left">
+            <div class="inline-flex items-center gap-2 bg-[#0F766E]/20 border border-[#0F766E] px-4 py-1.5 rounded-full text-xs font-semibold text-[#D4AF37] mb-6">
+                ✨ Next-Gen Islamic Platform
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-6">
+                One Step Closer <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#F3E5AB]">To Jannah</span>
+            </h1>
+            <p class="text-gray-400 text-base md:text-lg mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                Imanify adalah platform Islami modern yang membantu umat Muslim meningkatkan kualitas ibadah, memperdalam ilmu agama, dan membangun kebiasaan positif setiap hari melalui teknologi yang mudah diakses.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
+                <a href="quran.html" class="bg-gradient-to-r from-[#0F766E] to-[#139288] text-white px-8 py-3.5 rounded-xl font-medium hover:opacity-90 transition text-center shadow-xl shadow-[#0F766E]/30">
+                    Mulai Eksplorasi
+                </a>
+                <a href="ai.html" class="glass-card text-white px-8 py-3.5 rounded-xl font-medium hover:bg-white/5 transition flex items-center justify-center gap-2">
+                    🎯 Main Quiz Islami
+                </a>
+            </div>
+        </div>
+
+        <div class="flex-1 w-full max-w-md lg:max-w-none">
+            <div class="glass-card rounded-3xl p-8 relative overflow-hidden shadow-2xl">
+                <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                
+                <div class="relative z-10 text-center py-12">
+                    <span class="text-6xl mb-4 block font-arabic text-[#D4AF37]">﷽</span>
+                    <div class="w-24 h-24 mx-auto mb-6 bg-gradient-to-b from-[#D4AF37] to-[#0F766E] rounded-full flex items-center justify-center text-4xl shadow-lg">
+                        🕌
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Imanify</h3>
+                    <p class="text-xs text-gray-400 max-w-xs mx-auto">Sistem cerdas pembentuk kebiasaan ibadah harian yang fleksibel dan interaktif.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="px-6 md:px-12 max-w-7xl mx-auto pb-16">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <a href="shalat.html" class="glass-card p-6 rounded-2xl flex flex-col justify-between hover:border-[#D4AF37]/50 transition block">
+                <div>
+                    <span class="text-xs text-[#D4AF37] font-semibold tracking-wider uppercase">Jadwal Hari Ini</span>
+                    <h4 class="text-2xl font-bold mt-1 text-white">Lihat Waktu Shalat Real-Time</h4>
+                </div>
+                <div class="text-xs text-gray-400 mt-4">⏱️ Klik untuk deteksi GPS otomatis &rarr;</div>
+            </a>
+            
+            <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-xs text-teal-400 font-semibold tracking-wider uppercase">Komunitas Global</span>
+                        <a href="komunitas.html" class="text-[10px] text-gray-500 hover:text-[#D4AF37]">Lihat Forum &rarr;</a>
+                    </div>
+                    <div id="home-feed-container" class="space-y-2 mt-2"></div>
+                </div>
+            </div>
+
+            <div class="glass-card p-6 rounded-2xl border-l-2 border-l-[#D4AF37] flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-xs text-gray-400 font-medium">💡 Ayat Hari Ini</span>
+                        <button onclick="salinAyat()" class="text-[9px] bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white px-2 py-0.5 rounded transition">📋 Salin</button>
+                    </div>
+                    <p id="ayat-arab" class="font-arabic text-xl text-white text-right tracking-wide leading-relaxed mb-1"></p>
+                    <p id="ayat-latin" class="text-[10px] text-emerald-400 italic mb-1"></p>
+                    <p id="ayat-arti" class="text-xs text-gray-300 leading-snug"></p>
+                </div>
+                <span id="ayat-surat" class="text-[11px] text-[#D4AF37] mt-3 block font-medium"></span>
+            </div>
+            
+        </div>
+    </section>
+
+    <section class="px-6 md:px-12 max-w-7xl mx-auto pb-20">
+        <h2 class="text-2xl font-bold text-center mb-2">Eksplorasi Ekosistem <span class="text-[#D4AF37]">Imanify</span></h2>
+        <p class="text-gray-400 text-center text-sm mb-12 max-w-md mx-auto">Satu platform modern untuk seluruh kebutuhan spiritualitas harianmu.</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <a href="quran.html" class="glass-card p-6 rounded-2xl hover:border-[#D4AF37] transition group cursor-pointer block">
+                <div class="w-12 h-12 bg-[#0F766E]/20 text-[#D4AF37] rounded-xl flex items-center justify-center text-xl mb-4 group-hover:bg-[#0F766E] group-hover:text-white transition">📖</div>
+                <h3 class="text-lg font-semibold mb-2 group-hover:text-[#D4AF37] transition">Al-Qur'an Digital Premium</h3>
+                <p class="text-gray-400 text-xs leading-relaxed">Akses 114 surah dengan terjemahan, audio murottal, tafsir ringkas, dan fitur bookmark yang cerdas.</p>
+            </a>
+            <a href="tracker.html" class="glass-card p-6 rounded-2xl hover:border-[#D4AF37] transition group cursor-pointer block">
+                <div class="w-12 h-12 bg-[#0F766E]/20 text-[#D4AF37] rounded-xl flex items-center justify-center text-xl mb-4 group-hover:bg-[#0F766E] group-hover:text-white transition">📈</div>
+                <h3 class="text-lg font-semibold mb-2 group-hover:text-[#D4AF37] transition">Cerdas Ibadah Tracker</h3>
+                <p class="text-gray-400 text-xs leading-relaxed">Catat checklist shalat, tilawah, dan dzikir harianmu. Pantau perkembangan grafik mingguanmu.</p>
+            </a>
+            <a href="ai.html" class="glass-card p-6 rounded-2xl hover:border-[#D4AF37] transition group cursor-pointer block">
+                <div class="w-12 h-12 bg-[#0F766E]/20 text-[#D4AF37] rounded-xl flex items-center justify-center text-xl mb-4 group-hover:bg-[#0F766E] group-hover:text-white transition">🏆</div>
+                <h3 class="text-lg font-semibold mb-2 group-hover:text-[#D4AF37] transition">Quiz Islami Interaktif</h3>
+                <p class="text-gray-400 text-xs leading-relaxed">Uji dan asah wawasanmu mengenai Sirah Nabawiyah, Fiqih, dan Sejarah Islam dengan bank soal yang diacak otomatis!</p>
+            </a>
+        </div>
+    </section>
+
+    <section class="px-6 md:px-12 max-w-7xl mx-auto pb-24 grid grid-cols-1 lg:grid-cols-2 gap-12">
+        
+        <div class="glass-card p-8 rounded-3xl relative overflow-hidden">
+            <h3 class="text-xl font-bold mb-2 flex items-center gap-2">✨ Target Hari Ini</h3>
+            <p class="text-xs text-gray-400 mb-6">Selesaikan misi kebaikanmu untuk menjaga konsistensi.</p>
+            
+            <div class="mb-6">
+                <div class="flex justify-between text-xs mb-2">
+                    <span class="text-gray-400">Progress Ibadah</span>
+                    <span id="progress-text" class="text-[#D4AF37] font-semibold">0%</span>
+                </div>
+                <div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
+                    <div id="progress-bar" class="bg-gradient-to-r from-[#0F766E] to-[#D4AF37] h-full w-[0%] rounded-full transition-all duration-500"></div>
+                </div>
+            </div>
+
+            <div class="space-y-3">
+                <label class="flex items-center justify-between p-3.5 bg-white/5 border border-white/10 rounded-xl cursor-pointer hover:border-[#0F766E] transition select-none">
+                    <div class="flex items-center gap-3">
+                        <input type="checkbox" class="todo-checkbox accent-[#0F766E] w-4 h-4 rounded" data-id="shalat">
+                        <span class="text-sm font-medium text-gray-200">Shalat Fardhu 5 Waktu</span>
+                    </div>
+                    <span class="status-badge text-xs text-gray-400 bg-white/5 px-2.5 py-1 rounded-md">Belum</span>
+                </label>
+
+                <label class="flex items-center justify-between p-3.5 bg-white/5 border border-white/10 rounded-xl cursor-pointer hover:border-[#0F766E] transition select-none">
+                    <div class="flex items-center gap-3">
+                        <input type="checkbox" class="todo-checkbox accent-[#0F766E] w-4 h-4 rounded" data-id="tilawah">
+                        <span class="text-sm font-medium text-gray-200">Tilawah Al-Qur'an (1 Juz)</span>
+                    </div>
+                    <span class="status-badge text-xs text-gray-400 bg-white/5 px-2.5 py-1 rounded-md">Belum</span>
+                </label>
+
+                <label class="flex items-center justify-between p-3.5 bg-white/5 border border-white/10 rounded-xl cursor-pointer hover:border-[#0F766E] transition select-none">
+                    <div class="flex items-center gap-3">
+                        <input type="checkbox" class="todo-checkbox accent-[#0F766E] w-4 h-4 rounded" data-id="matsurat">
+                        <span class="text-sm font-medium text-gray-200">Al-Matsurat Petang</span>
+                    </div>
+                    <span class="status-badge text-xs text-gray-400 bg-white/5 px-2.5 py-1 rounded-md">Belum</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="glass-card p-6 rounded-3xl flex flex-col justify-between min-h-[350px]">
+            <div>
+                <div class="flex items-center gap-3 border-b border-gray-800 pb-4 mb-4">
+                    <div class="w-10 h-10 bg-[#0F766E] rounded-xl flex items-center justify-center text-lg shadow-lg">🏆</div>
+                    <div>
+                        <h4 class="text-sm font-semibold">Quiz Islami Interaktif</h4>
+                        <span class="text-[10px] text-emerald-400 flex items-center gap-1">● Tersedia Gratis</span>
+                    </div>
+                </div>
+                
+                <div class="space-y-4 py-6 text-center">
+                    <div class="text-5xl animate-bounce">✨🎯✨</div>
+                    <p class="text-sm text-gray-200 font-medium">Bosan nunggu balasan AI yang lama?</p>
+                    <p class="text-xs text-gray-400 max-w-xs mx-auto leading-relaxed">
+                        Yuk uji wawasan dan pemahaman agamamu langsung di browser secara instan, interaktif, dan seru tanpa hambatan loading server!
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-6">
+                <a href="ai.html" class="block w-full text-center bg-[#D4AF37] text-[#0B1E1C] py-3.5 rounded-xl text-xs font-bold hover:opacity-90 transition tracking-wider shadow-md">
+                    MULAI BERMAIN SEKARANG ➔
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div id="welcome-popup" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+        <div class="glass-card p-8 rounded-3xl max-w-sm w-full mx-6 text-center shadow-2xl border border-[#D4AF37]/30">
+            <div class="w-16 h-16 bg-gradient-to-b from-[#D4AF37] to-[#0F766E] rounded-full flex items-center justify-center text-3xl mx-auto mb-4 shadow-lg">
+                👋
+            </div>
+            <h3 class="text-xl font-bold text-white mb-1">Ahlan Wa Sahlan!</h3>
+            <p id="welcome-user" class="text-sm text-[#D4AF37] font-semibold mb-3"></p>
+            <p class="text-xs text-gray-400 mb-6 leading-relaxed">Selamat datang kembali di Imanify. Yuk, mulai penuhi target ibadahmu hari ini!</p>
+            
+            <button onclick="closePopup()" class="w-full bg-[#0F766E] hover:bg-[#115e56] text-white text-xs font-semibold py-3 rounded-xl transition">
+                Mulai Eksplorasi
+            </button>
+        </div>
+    </div>
+
+    <footer class="border-t border-gray-800 bg-[#071413] py-8 px-6 text-center text-xs tracking-wide text-gray-500">
+        <p class="mb-2">&copy; 2026 Imanify Platform. All rights reserved.</p>
+        <p class="font-medium text-gray-400">
+            Engineered with heart by <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#F3E5AB] font-semibold">Khalisa Fathiha Putri Kurnia</span>
+        </p>
+    </footer>
+
+    <script>
+        // --- 0. SATPAM HALAMAN (CEK LOGIN) ---
+        const sesiAktif = localStorage.getItem('imanify_session');
+        if (!sesiAktif) {
+            window.location.href = "login.html";
+        }
+
+        // --- 1. Logika Responsive Mobile Navbar ---
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+        }
+
+        // --- 2. Database & Logika Ayat Hari Ini ---
+        const daftarAyat = [
+            {
+                arab: "إِنَّ مَعَ الْعُسْرِ يُسْرًا",
+                latin: "Inna ma'al 'usri yusraa.",
+                arti: "Sesungguhnya sesudah kesulitan itu ada kemudahan.",
+                surat: "QS. Al-Insyirah: 6"
+            },
+            {
+                arab: "فَاذْكُرُونِي أَذْكُرْكُمْ",
+                latin: "Fadzkuruunii adzkurkum.",
+                arti: "Maka ingatlah kepada-Ku, Aku pun akan ingat kepadamu.",
+                surat: "QS. Al-Baqarah: 152"
+            },
+            {
+                arab: "وَإِن تَعُدُwوا۟ نِعْمَةَ ٱللَّهِ لَا تُحْصُوهَآ",
+                latin: "Wa in ta'udduu ni'matallahi laa tuhshuuhā.",
+                arti: "Dan jika kamu menghitung nikmat Allah, niscaya kamu tidak akan mampu menentukan jumlahnya.",
+                surat: "QS. Ibrahim: 34"
+            }
+        ];
+
+        function renderAyatHariIni() {
+            const arabEl = document.getElementById('ayat-arab');
+            const latinEl = document.getElementById('ayat-latin');
+            const artiEl = document.getElementById('ayat-arti');
+            const suratEl = document.getElementById('ayat-surat');
+
+            if (!arabEl) return;
+
+            const hariIni = new Date().getDate();
+            const indeks = hariIni % daftarAyat.length;
+            const data = daftarAyat[indeks];
+
+            arabEl.innerText = data.arab;
+            latinEl.innerText = `"${data.latin}"`;
+            artiEl.innerText = data.arti;
+            suratEl.innerText = data.surat;
+        }
+
+        function salinAyat() {
+            const arab = document.getElementById('ayat-arab').innerText;
+            const surat = document.getElementById('ayat-surat').innerText;
+            navigator.clipboard.writeText(arab + " (" + surat + ")");
+            alert("Ayat berhasil disalin ke memori perangkatmu!");
+        }
+
+        // --- 3. Logika Sinkronisasi Komunitas Global ---
+        function renderKomunitasHome() {
+            const feedContainer = document.getElementById('home-feed-container');
+            if (!feedContainer) return;
+
+            const feedDefault = [
+                { nama: "Hamba Allah", waktu: "Baru saja", isi: "Jangan lupa al-kahfi ya kawan-kawan semua di hari Jum'at berkah ini." },
+                { nama: "Ahmad F.", waktu: "1 jam yang lalu", isi: "Reminder: Seberat apa pun harimu, shalat tetap penenang terbaik." }
+            ];
+
+            const dataLokal = JSON.parse(localStorage.getItem('imanify_posts')) || feedDefault;
+
+            let html = "";
+            dataLokal.slice(0, 2).forEach(post => {
+                html += `
+                    <div class="p-2.5 bg-white/5 rounded-xl border border-white/5 text-left">
+                        <div class="flex justify-between items-center text-[9px] mb-0.5">
+                            <span class="font-bold text-[#D4AF37]">${post.nama}</span>
+                            <span class="text-gray-500">${post.waktu}</span>
+                        </div>
+                        <p class="text-[11px] text-gray-300 leading-normal line-clamp-2">"${post.isi}"</p>
+                    </div>
+                `;
+            });
+            feedContainer.innerHTML = html;
+        }
+
+        // --- 4. Logika Interaktif Target Checklist Hari Ini ---
+        const todos = document.querySelectorAll('.todo-checkbox');
+        const progressBar = document.getElementById('progress-bar');
+        const progressText = document.getElementById('progress-text');
+
+        function updateProgress() {
+            const total = todos.length;
+            if (!total) return;
+            let checkedCount = 0;
+
+            todos.forEach(todo => {
+                const badge = todo.closest('label').querySelector('.status-badge');
+                if (todo.checked) {
+                    checkedCount++;
+                    if (badge) {
+                        badge.innerText = "Selesai";
+                        badge.className = "status-badge text-xs text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-md";
+                    }
+                } else {
+                    if (badge) {
+                        badge.innerText = "Belum";
+                        badge.className = "status-badge text-xs text-gray-400 bg-white/5 px-2.5 py-1 rounded-md";
+                    }
+                }
+            });
+
+            const percent = Math.round((checkedCount / total) * 100);
+            if (progressBar && progressText) {
+                progressBar.style.width = `${percent}%`;
+                progressText.innerText = `${percent}%`;
+            }
+        }
+
+        todos.forEach(todo => {
+            todo.addEventListener('change', updateProgress);
+        });
+
+        // --- 5. Logika Pop Up Sapaan Setelah Login ---
+        function cekSapaanLogin() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const namaUser = localStorage.getItem('imanify_session');
+
+            if (urlParams.get('login') === 'success' && namaUser) {
+                const popup = document.getElementById('welcome-popup');
+                const userEl = document.getElementById('welcome-user');
+                
+                if (popup && userEl) {
+                    userEl.innerText = namaUser;
+                    popup.classList.remove('hidden');
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                }
+            }
+        }
+
+        function closePopup() {
+            const popup = document.getElementById('welcome-popup');
+            if (popup) popup.classList.add('hidden');
+        }
+
+        // Jalankan program otomasi saat dokumen siap dibuka
+        window.addEventListener('DOMContentLoaded', () => {
+            renderAyatHariIni();
+            renderKomunitasHome();
+            updateProgress();
+            cekSapaanLogin();
+        });
+    </script>
+</body>
+</html>

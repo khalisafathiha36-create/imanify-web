@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalender Hijriah & Konverter - Imanify</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0B1E1C;
+            color: #FFFFFF;
+        }
+        .glass-card {
+            background: rgba(15, 118, 110, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+        }
+        .glass-nav {
+            background: rgba(11, 30, 28, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <nav class="glass-nav fixed top-0 left-0 right-0 z-50 py-4 px-6 md:px-12 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <span class="text-2xl font-bold tracking-wider text-white">Iman<span class="text-[#D4AF37]">ify</span></span>
+        </div>
+
+        <div class="hidden xl:flex items-center gap-6 text-sm font-medium text-gray-300">
+            <a href="index.html" class="hover:text-[#D4AF37] transition">Home</a>
+            <a href="quran.html" class="hover:text-[#D4AF37] transition">Al-Qur'an</a>
+            <a href="shalat.html" class="hover:text-[#D4AF37] transition">Jadwal Shalat</a>
+            <a href="doa.html" class="hover:text-[#D4AF37] transition">Doa & Dzikir</a>
+            <a href="hadits.html" class="hover:text-[#D4AF37] transition">Hadits</a>
+            <a href="artikel.html" class="hover:text-[#D4AF37] transition">Artikel Islami</a>
+            <a href="tracker.html" class="hover:text-[#D4AF37] transition">Ibadah Tracker</a>
+            <a href="zakat.html" class="hover:text-[#D4AF37] transition">Zakat</a>
+            <a href="kalender.html" class="text-[#D4AF37] hover:text-white transition">Kalender Hijriah</a>
+            <a href="masjid.html" class="hover:text-[#D4AF37] transition">Masjid</a>
+            <a href="komunitas.html" class="hover:text-[#D4AF37] transition">Komunitas</a>
+            <a href="ai.html" class="hover:text-[#D4AF37] transition">Quiz Islami</a>
+        </div>
+
+        <div class="flex xl:hidden items-center">
+            <button id="menu-btn" class="text-white focus:outline-none p-2 bg-white/5 rounded-lg border border-white/10">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden absolute top-full left-0 right-0 bg-[#0B1E1C]/95 backdrop-blur-lg border-b border-[#D4AF37]/20 p-6 flex flex-col gap-4 text-sm font-medium text-gray-300 xl:hidden shadow-xl">
+            <a href="index.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Home</a>
+            <a href="quran.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Al-Qur'an</a>
+            <a href="shalat.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Jadwal Shalat</a>
+            <a href="doa.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Doa & Dzikir</a>
+            <a href="hadits.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Hadits</a>
+            <a href="artikel.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Artikel Islami</a>
+            <a href="tracker.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Ibadah Tracker</a>
+            <a href="zakat.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Zakat</a>
+            <a href="kalender.html" class="text-[#D4AF37] py-2 border-b border-white/5">Kalender Hijriah</a>
+            <a href="masjid.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Masjid</a>
+            <a href="komunitas.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Komunitas</a>
+            <a href="ai.html" class="hover:text-[#D4AF37] py-2">Quiz Islami</a>
+        </div>
+    </nav>
+
+    <main class="pt-32 pb-24 px-6 max-w-4xl mx-auto min-h-screen">
+        <div class="text-center mb-10">
+            <h1 class="text-3xl md:text-5xl font-bold mb-3">📅 Kalender <span class="text-[#D4AF37]">Hijriah</span></h1>
+            <p class="text-gray-400 text-xs md:text-sm max-w-md mx-auto">Pantau penanggalan Islam, cek hari-hari penting, dan lakukan konversi tanggal Masehi ke Hijriah secara instan.</p>
+        </div>
+
+        <div class="glass-card rounded-2xl p-6 mb-8 border border-[#D4AF37]/30">
+            <h3 class="text-xs font-bold tracking-wide text-[#D4AF37] mb-3 uppercase flex items-center gap-2">
+                🔄 Konverter Tanggal Masehi &rarr; Hijriah
+            </h3>
+            <div class="flex flex-col md:flex-row gap-3 items-end">
+                <div class="w-full">
+                    <label class="text-[11px] text-gray-400 block mb-1">Pilih Tanggal Masehi</label>
+                    <input id="input-masehi" type="date" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-xs md:text-sm focus:outline-none focus:border-[#D4AF37] text-white">
+                </div>
+                <button id="btn-convert" class="w-full md:w-auto bg-[#0F766E] text-white px-6 py-2 rounded-xl text-xs font-semibold hover:bg-[#115e56] transition whitespace-nowrap h-[38px] md:h-[42px]">
+                    Konversi Tanggal
+                </button>
+            </div>
+            <div id="result-box" class="hidden mt-4 p-3 bg-white/5 border border-dashed border-[#D4AF37]/30 rounded-xl text-center">
+                <p class="text-xs text-gray-400">Hasil Penanggalan Hijriah:</p>
+                <p id="hijri-result-text" class="text-sm md:text-base font-bold text-[#D4AF37] mt-1"></p>
+            </div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-6 md:p-8 mb-6">
+            <div class="flex justify-between items-center mb-6">
+                <button id="prev-month" class="px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-xs transition">&larr; Prev</button>
+                <div class="text-center">
+                    <h2 id="month-year-georgian" class="text-base md:text-lg font-bold text-white">-</h2>
+                    <p id="month-year-hijri" class="text-xs text-[#D4AF37] font-medium mt-0.5">-</p>
+                </div>
+                <button id="next-month" class="px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-xs transition">Next &rarr;</button>
+            </div>
+
+            <div class="grid grid-cols-7 gap-2 text-center text-[11px] font-semibold tracking-wider text-gray-400 mb-4 border-b border-white/5 pb-2">
+                <div class="text-red-400">Ahd</div>
+                <div>Sen</div>
+                <div>Sel</div>
+                <div>Rab</div>
+                <div>Kam</div>
+                <div>Jum</div>
+                <div class="text-emerald-400">Sab</div>
+            </div>
+
+            <div id="calendar-days" class="grid grid-cols-7 gap-2 text-center text-xs md:text-sm">
+                </div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-6 border border-white/5">
+            <h3 class="text-xs font-bold tracking-wide text-[#D4AF37] mb-3 uppercase flex items-center gap-1.5">
+                ✨ Hari Besar Bulan Ini
+            </h3>
+            <ul id="islamic-events" class="space-y-2 text-xs text-gray-300">
+                </ul>
+        </div>
+    </main>
+
+    <footer class="border-t border-gray-800 bg-[#071413] py-8 px-6 text-center text-xs tracking-wide text-gray-500">
+        <p class="mb-2">&copy; 2026 Imanify Platform. All rights reserved.</p>
+        <p class="font-medium text-gray-400">
+            Engineered with heart by <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#F3E5AB] font-semibold">Khalisa Fathiha Putri Kurnia</span>
+        </p>
+    </footer>
+
+    <script>
+        // Logika Navigasi Mobile Menu
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+
+        // Set default waktu berjalan saat halaman dimuat
+        let currentDate = new Date();
+
+        const monthsGeorgian = [
+            "Januari", "Februari", "Maret", "April", "Mei", "Juni", 
+            "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+        ];
+
+        // Daftar Nama Bulan Hijriah Utama
+        const monthsHijri = [
+            "Muharram", "Safar", "Rabi'ul Awwal", "Rabi'ul Akhir", "Jumadil Awwal", "Jumadil Akhir",
+            "Rajab", "Sya'ban", "Ramadhan", "Syawwal", "Dzulqa'dah", "Dzulhijjah"
+        ];
+
+        // Fungsi konversi Tanggal Masehi ke String Penanggalan Hijriah Indonesia secara otomatis
+        function convertToHijriFormat(dateObj) {
+            try {
+                // Menggunakan Intl API bawaan browser modern untuk akurasi kalender Islamiah
+                const formatter = new Intl.DateTimeFormat('id-ID-u-ca-islamic', {
+                    day: 'numeric',
+                    month: 'numeric',
+                    year: 'numeric'
+                });
+                const parts = formatter.format(dateObj).split('/');
+                // Format default id-ID: Hari/Bulan/Tahun Hijriah
+                const dayH = parseInt(parts[0]);
+                const monthH = parseInt(parts[1]) - 1;
+                const yearH = parts[2].split(' ')[0]; // Ambil angkanya saja
+
+                return `${dayH} ${monthsHijri[monthH]} ${yearH} H`;
+            } catch (e) {
+                return "Gagal menghitung penanggalan.";
+            }
+        }
+
+        // Logika Eksekusi Tombol Konverter Manual
+        document.getElementById('btn-convert').addEventListener('click', () => {
+            const inputVal = document.getElementById('input-masehi').value;
+            if (!inputVal) {
+                alert("Harap pilih tanggal masehi terlebih dahulu!");
+                return;
+            }
+
+            const targetDate = new Date(inputVal);
+            const resultText = convertToHijriFormat(targetDate);
+            
+            document.getElementById('result-box').classList.remove('hidden');
+            document.getElementById('hijri-result-text').innerText = resultText;
+        });
+
+        // Database Simulasi Hari Besar Islam Kontekstual Tahun Berjalan
+        function getIslamicEvents(year, month) {
+            // Contoh data event statis untuk panduan visual user/klien
+            const eventsData = {
+                0: ["1 Muharram - Tahun Baru Islam"],
+                8: ["1 Ramadhan - Awal Puasa", "17 Ramadhan - Nuzulul Qur'an"],
+                9: ["1 Syawwal - Hari Raya Idul Fitri"],
+                11: ["10 Dzulhijjah - Hari Raya Idul Adha"]
+            };
+
+            // Dapatkan estimasi index bulan hijriah pada pertengahan bulan masehi terkait
+            const middleDate = new Date(year, month, 15);
+            try {
+                const formatter = new Intl.DateTimeFormat('id-ID-u-ca-islamic', { month: 'numeric' });
+                const hijriMonthIdx = parseInt(formatter.format(middleDate)) - 1;
+                return eventsData[hijriMonthIdx] || ["Tidak ada hari besar keagamaan utama di bulan ini.", "Gunakan fitur konverter di atas untuk cek hari spesifik."];
+            } catch(e) {
+                return ["Jadwal puasa sunnah Ayyamul Bidh tersedia setiap tanggal 13, 14, 15 Hijriah."];
+            }
+        }
+
+        // Fungsi Render Layout Utama Kalender Bulanan
+        function renderCalendar() {
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+
+            // Set Judul Masehi
+            document.getElementById('month-year-georgian').innerText = `${monthsGeorgian[month]} ${year}`;
+            
+            // Dapatkan rentang estimasi nama bulan Hijriah di awal & akhir bulan Masehi ini
+            const firstDate = new Date(year, month, 1);
+            const lastDate = new Date(year, month + 1, 0);
+            
+            try {
+                const fParts = new Intl.DateTimeFormat('id-ID-u-ca-islamic', { month: 'numeric', year: 'numeric' }).format(firstDate).split('/');
+                const lParts = new Intl.DateTimeFormat('id-ID-u-ca-islamic', { month: 'numeric', year: 'numeric' }).format(lastDate).split('/');
+                
+                const fMonthName = monthsHijri[parseInt(fParts[1]) - 1];
+                const lMonthName = monthsHijri[parseInt(lParts[1]) - 1];
+                const hYear = lParts[2].split(' ')[0];
+
+                document.getElementById('month-year-hijri').innerText = fMonthName === lMonthName ? `${lMonthName} ${hYear} H` : `${fMonthName} / ${lMonthName} ${hYear} H`;
+            } catch(e) {
+                document.getElementById('month-year-hijri').innerText = "Kalender Hijriah";
+            }
+
+            // Render List Pengumuman Hari Besar
+            const eventsContainer = document.getElementById('islamic-events');
+            eventsContainer.innerHTML = "";
+            getIslamicEvents(year, month).forEach(ev => {
+                const li = document.createElement('li');
+                li.className = "flex items-center gap-2 bg-white/5 p-2 rounded-lg border border-white/5";
+                li.innerHTML = `<span class="text-[#D4AF37]">•</span> ${ev}`;
+                eventsContainer.appendChild(li);
+            });
+
+            // Hitung Kalkulasi Grid Hari Masehi
+            const firstDayIndex = firstDate.getDay();
+            const totalDays = lastDate.getDate();
+
+            const daysContainer = document.getElementById('calendar-days');
+            daysContainer.innerHTML = "";
+
+            // Bikin Kotak Kosong untuk Penyelarasan Hari Awal Bulan
+            for (let i = 0; i < firstDayIndex; i++) {
+                const emptyDiv = document.createElement('div');
+                daysContainer.appendChild(emptyDiv);
+            }
+
+            // Loop Gambar Kotak Tanggal Asli
+            const today = new Date();
+            for (let day = 1; day <= totalDays; day++) {
+                const dayDiv = document.createElement('div');
+                dayDiv.className = "p-2 rounded-xl bg-white/5 border border-white/5 flex flex-col justify-between h-14 hover:border-[#D4AF37]/50 transition cursor-pointer";
+                
+                // Beri efek highlight khusus jika tanggalnya pas hari ini
+                if (day === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
+                    dayDiv.className += " bg-[#0F766E]/40 border-[#D4AF37]/60";
+                }
+
+                // Dapatkan Angka Tanggal Hijriah untuk Pojok Kanan Bawah Kotak
+                let hDayNum = "-";
+                try {
+                    const checkDate = new Date(year, month, day);
+                    hDayNum = new Intl.DateTimeFormat('id-ID-u-ca-islamic', { day: 'numeric' }).format(checkDate);
+                } catch(e) {}
+
+                dayDiv.innerHTML = `
+                    <span class="font-bold text-left block">${day}</span>
+                    <span class="text-[10px] text-[#D4AF37] text-right block font-medium">${hDayNum}</span>
+                `;
+                
+                // Tambahan interaktif: kalau kotak kalender di-klik, otomatis masuk ke input konverter atas
+                dayDiv.addEventListener('click', () => {
+                    const formattedMonth = String(month + 1).padStart(2, '0');
+                    const formattedDay = String(day).padStart(2, '0');
+                    document.getElementById('input-masehi').value = `${year}-${formattedMonth}-${formattedDay}`;
+                    document.getElementById('btn-convert').click();
+                    window.scrollTo({ top: 150, behavior: 'smooth' });
+                });
+
+                daysContainer.appendChild(dayDiv);
+            }
+        }
+
+        // Tombol Geser Bulan Sebelumnya/Berikutnya
+        document.getElementById('prev-month').addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            renderCalendar();
+        });
+
+        document.getElementById('next-month').addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            renderCalendar();
+        });
+
+        // Jalankan render kalender otomatis saat halaman dimuat pertama kali
+        window.addEventListener('DOMContentLoaded', () => {
+            renderCalendar();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Islami - Imanify</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0B1E1C;
+            color: #FFFFFF;
+        }
+        .glass-card {
+            background: rgba(15, 118, 110, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+        }
+        .glass-nav {
+            background: rgba(11, 30, 28, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <nav class="glass-nav fixed top-0 left-0 right-0 z-50 py-4 px-6 md:px-12 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <span class="text-2xl font-bold tracking-wider text-white">Iman<span class="text-[#D4AF37]">ify</span></span>
+        </div>
+
+        <div class="hidden xl:flex items-center gap-6 text-sm font-medium text-gray-300">
+            <a href="index.html" class="hover:text-[#D4AF37] transition">Home</a>
+            <a href="quran.html" class="hover:text-[#D4AF37] transition">Al-Qur'an</a>
+            <a href="shalat.html" class="hover:text-[#D4AF37] transition">Jadwal Shalat</a>
+            <a href="doa.html" class="hover:text-[#D4AF37] transition">Doa & Dzikir</a>
+            <a href="hadits.html" class="hover:text-[#D4AF37] transition">Hadits</a>
+            <a href="artikel.html" class="hover:text-[#D4AF37] transition">Artikel Islami</a>
+            <a href="tracker.html" class="hover:text-[#D4AF37] transition">Ibadah Tracker</a>
+            <a href="zakat.html" class="hover:text-[#D4AF37] transition">Zakat</a>
+            <a href="kalender.html" class="hover:text-[#D4AF37] transition">Kalender Hijriah</a>
+            <a href="masjid.html" class="hover:text-[#D4AF37] transition">Masjid</a>
+            <a href="komunitas.html" class="hover:text-[#D4AF37] transition">Komunitas</a>
+            <a href="ai.html" class="text-[#D4AF37] hover:text-white transition">Quiz Islami</a>
+        </div>
+
+        <div class="flex xl:hidden items-center">
+            <button id="menu-btn" class="text-white focus:outline-none p-2 bg-white/5 rounded-lg border border-white/10">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden absolute top-full left-0 right-0 bg-[#0B1E1C]/95 backdrop-blur-lg border-b border-[#D4AF37]/20 p-6 flex flex-col gap-4 text-sm font-medium text-gray-300 xl:hidden shadow-xl">
+            <a href="index.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Home</a>
+            <a href="quran.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Al-Qur'an</a>
+            <a href="shalat.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Jadwal Shalat</a>
+            <a href="doa.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Doa & Dzikir</a>
+            <a href="hadits.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Hadits</a>
+            <a href="artikel.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Artikel Islami</a>
+            <a href="tracker.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Ibadah Tracker</a>
+            <a href="zakat.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Zakat</a>
+            <a href="kalender.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Kalender Hijriah</a>
+            <a href="masjid.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Masjid</a>
+            <a href="komunitas.html" class="hover:text-[#D4AF37] py-2 border-b border-white/5">Komunitas</a>
+            <a href="ai.html" class="text-[#D4AF37] py-2">Quiz Islami</a>
+        </div>
+    </nav>
+
+    <section class="pt-32 pb-24 px-6 max-w-2xl mx-auto min-h-[calc(100vh-40px)] flex flex-col justify-center">
+        
+        <div class="text-center mb-8">
+            <h1 class="text-3xl md:text-5xl font-bold mb-3">Quiz <span class="text-[#D4AF37]">Islami</span></h1>
+            <p class="text-gray-400 text-xs md:text-sm">Uji dan asah wawasanmu seputar fiqih, sirah nabawiyah, dan sejarah Islam.</p>
+        </div>
+
+        <div id="start-box" class="glass-card rounded-2xl p-8 text-center space-y-6">
+            <div class="text-5xl">🏆</div>
+            <h2 class="text-xl font-semibold">Siap Menguji Wawasanmu?</h2>
+            <p class="text-gray-400 text-xs leading-relaxed">Quiz ini terdiri dari 5 pertanyaan pilihan ganda seputar ilmu agama. Dapatkan skor sempurna dan jadilah yang terbaik!</p>
+            <button id="btn-start" class="w-full bg-[#0F766E] text-white border border-[#D4AF37]/40 py-3 rounded-xl font-medium hover:bg-[#139288] transition cursor-pointer shadow-lg">Mulai Quiz Sekarang</button>
+        </div>
+
+        <div id="quiz-box" class="hidden glass-card rounded-2xl p-6 space-y-6">
+            <div class="flex justify-between items-center text-xs text-gray-400 border-b border-white/5 pb-3">
+                <span id="question-number" class="font-medium">Pertanyaan 1 dari 5</span>
+                <span id="score-live" class="bg-[#D4AF37]/10 text-[#D4AF37] px-2 py-1 rounded">Skor: 0</span>
+            </div>
+
+            <h3 id="question-text" class="text-base md:text-lg font-medium leading-relaxed">Loading pertanyaan...</h3>
+
+            <div id="options-container" class="flex flex-col gap-3">
+                </div>
+
+            <button id="btn-next" class="hidden w-full bg-[#D4AF37] text-black py-3 rounded-xl font-semibold hover:bg-[#f3e5ab] transition cursor-pointer text-xs tracking-wider text-center">PERNYATAAN SELANJUTNYA &rarr;</button>
+        </div>
+
+        <div id="result-box" class="hidden glass-card rounded-2xl p-8 text-center space-y-6">
+            <div id="result-emoji" class="text-6xl">🎉</div>
+            <h2 class="text-2xl font-bold">Quiz Selesai!</h2>
+            
+            <div class="py-4 bg-white/5 rounded-xl border border-white/5 inline-block px-8">
+                <p class="text-xs text-gray-400 mb-1">Skor Akhir Kamu</p>
+                <p id="final-score" class="text-4xl font-extrabold text-[#D4AF37]">100</p>
+            </div>
+
+            <p id="result-message" class="text-gray-300 text-xs max-w-sm mx-auto leading-relaxed">Masha Allah! Pemahaman agamamu sudah sangat luar biasa. Pertahankan terus ya!</p>
+            
+            <button id="btn-restart" class="w-full bg-[#0F766E] text-white border border-[#D4AF37]/40 py-3 rounded-xl font-medium hover:bg-[#139288] transition cursor-pointer">Coba Quiz Lagi</button>
+        </div>
+
+    </section>
+
+    <footer class="border-t border-gray-800 bg-[#071413] py-8 px-6 text-center text-xs tracking-wide text-gray-500">
+        <p class="mb-2">&copy; 2026 Imanify Platform. All rights reserved.</p>
+        <p class="font-medium text-gray-400">
+            Engineered with heart by <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#F3E5AB] font-semibold">Khalisa Fathiha Putri Kurnia</span>
+        </p>
+    </footer>
+
+       <script>
+        // Satpam Check Login (Aktifkan jika pakai sistem login)
+        const sesiAktif = localStorage.getItem('imanify_session');
+        if (!sesiAktif) { window.location.href = "login.html"; }
+
+        // 1. Logika Menu Mobile Navbar
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // 2. DATABASE BANK SOAL LEBIH BANYAK
+        const masterQuizData = [
+            {
+                question: "Siapakah nama malaikat yang bertugas sebagai pencabut nyawa?",
+                options: ["Malaikat Jibril", "Malaikat Israfil", "Malaikat Izrail", "Malaikat Mikail"],
+                answer: 2
+            },
+            {
+                question: "Berapakah jumlah rakaat shalat fardhu dalam sehari semalam?",
+                options: ["15 Rakaat", "17 Rakaat", "21 Rakaat", "12 Rakaat"],
+                answer: 1
+            },
+            {
+                question: "Siapakah nama khalifah pertama dari Khulafaur Rasyidin?",
+                options: ["Umar bin Khattab", "Utsman bin Affan", "Ali bin Abi Thalib", "Abu Bakar Ash-Shiddiq"],
+                answer: 3
+            },
+            {
+                question: "Surat apakah yang menjadi surat terpanjang di dalam Al-Qur'an?",
+                options: ["Surat Al-Baqarah", "Surat Ali 'Imran", "Surat Yasin", "Surat Al-Ma'idah"],
+                answer: 0
+            },
+            {
+                question: "Nabi yang diberikan mukjizat tidak hangus terbakar oleh api raja Namrud adalah...",
+                options: ["Nabi Musa A.S", "Nabi Ibrahim A.S", "Nabi Isa A.S", "Nabi Nuh A.S"],
+                answer: 1
+            },
+            {
+                question: "Kota manakah yang menjadi tempat kelahiran Nabi Muhammad SAW?",
+                options: ["Madinah", "Makkah", "Yerusalem", "Thaif"],
+                answer: 1
+            },
+            {
+                question: "Kitab suci Taurat diturunkan kepada nabi...",
+                options: ["Nabi Daud A.S", "Nabi Isa A.S", "Nabi Musa A.S", "Nabi Muhammad SAW"],
+                answer: 2
+            },
+            {
+                question: "Bulan kesembilan dalam kalender Hijriah yang diwajibkan berpuasa adalah bulan...",
+                options: ["Muharram", "Syawal", "Dzulhijjah", "Ramadhan"],
+                answer: 3
+            },
+            {
+                question: "Siapakah nama ibu kandung dari Nabi Muhammad SAW?",
+                options: ["Siti Khadijah", "Siti Aminah", "Siti Fatimah", "Halimah As-Sa'diyyah"],
+                answer: 1
+            },
+            {
+                question: "Peristiwa perjalanan malam Nabi Muhammad SAW dari Masjidil Haram ke Masjidil Aqsa lalu ke Sidratul Muntaha disebut...",
+                options: ["Hijrah", "Fathul Makkah", "Isra Mi'raj", "Nuzulul Qur'an"],
+                answer: 2
+            }
+        ];
+
+        // 3. STATE MANAGEMENT GAME VARIABLE
+        let quizData = []; // Tempat menampung 5 soal yang sudah diacak
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let hasAnswered = false;
+
+        // Kumpulan Element Dom Box Container
+        const startBox = document.getElementById('start-box');
+        const quizBox = document.getElementById('quiz-box');
+        const resultBox = document.getElementById('result-box');
+
+        // Kumpulan Element Dom Konten Komponen
+        const btnStart = document.getElementById('btn-start');
+        const btnNext = document.getElementById('btn-next');
+        const btnRestart = document.getElementById('btn-restart');
+        const qNumberText = document.getElementById('question-number');
+        const qLiveScore = document.getElementById('score-live');
+        const qText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+
+        // Element Hasil Akhir
+        const finalScoreText = document.getElementById('final-score');
+        const resultEmoji = document.getElementById('result-emoji');
+        const resultMessage = document.getElementById('result-message');
+
+        // Fungsi untuk mengacak dan mengambil 5 soal dari master data
+        function prepareQuizQuestions() {
+            // Mengacak urutan seluruh bank soal menggunakan algoritma Fisher-Yates
+            const shuffled = [...masterQuizData].sort(() => 0.5 - Math.random());
+            // Ambil 5 soal saja untuk dimainkan ronde ini
+            quizData = shuffled.slice(0, 5);
+        }
+
+        // 4. ACTION CONTROLLER LOGIC
+        
+        // Memulai Permainan Quiz
+        btnStart.addEventListener('click', () => {
+            startBox.classList.add('hidden');
+            quizBox.classList.remove('hidden');
+            prepareQuizQuestions(); // Acak kumpulan soal baru
+            loadQuestion();
+        });
+
+        // Memuat Pertanyaan Baru Berdasarkan Indeks
+        function loadQuestion() {
+            hasAnswered = false;
+            btnNext.classList.add('hidden');
+            optionsContainer.innerHTML = "";
+
+            const currentData = quizData[currentQuestionIndex];
+            
+            // Update teks info progress nomor dan skor live
+            qNumberText.innerText = `Pertanyaan ${currentQuestionIndex + 1} dari ${quizData.length}`;
+            qLiveScore.innerText = `Skor: ${score}`;
+            qText.innerText = currentData.question;
+
+            // Render opsi tombol pilihan jawaban secara dinamis
+            currentData.options.forEach((option, index) => {
+                const btnOption = document.createElement('button');
+                btnOption.className = "w-full text-left bg-white/5 border border-white/10 p-4 rounded-xl text-xs hover:bg-white/10 transition cursor-pointer flex justify-between items-center";
+                btnOption.innerHTML = `<span>${option}</span>`;
+                
+                // Menghubungkan fungsi klik validasi jawaban
+                btnOption.addEventListener('click', () => selectAnswer(index, btnOption));
+                optionsContainer.appendChild(btnOption);
+            });
+        }
+
+        // Memvalidasi Pilihan Jawaban dari Pengguna
+        function selectAnswer(selectedIndex, clickedButton) {
+            if (hasAnswered) return; 
+            hasAnswered = true;
+
+            const currentData = quizData[currentQuestionIndex];
+            const correctIndex = currentData.answer;
+            const allOptionButtons = optionsContainer.querySelectorAll('button');
+
+            // Jika jawaban BENAR
+            if (selectedIndex === correctIndex) {
+                score += 20; 
+                clickedButton.className = "w-full text-left bg-emerald-500/20 border border-emerald-500 p-4 rounded-xl text-xs font-medium text-emerald-300 flex justify-between items-center";
+                clickedButton.innerHTML += "<span>✅ Benar</span>";
+            } 
+            // Jika jawaban SALAH
+            else {
+                clickedButton.className = "w-full text-left bg-red-500/20 border border-red-500 p-4 rounded-xl text-xs font-medium text-red-300 flex justify-between items-center";
+                clickedButton.innerHTML += "<span>❌ Salah</span>";
+
+                // Beri penanda warna hijau pada tombol yang seharusnya BENAR
+                allOptionButtons[correctIndex].className = "w-full text-left bg-emerald-500/10 border border-emerald-500/50 p-4 rounded-xl text-xs font-medium text-emerald-300 flex justify-between items-center";
+            }
+
+            allOptionButtons.forEach(btn => btn.style.cursor = 'default');
+            qLiveScore.innerText = `Skor: ${score}`;
+            btnNext.classList.remove('hidden');
+        }
+
+        // Mengatur Alur Tombol Lanjut (Next Question)
+        btnNext.addEventListener('click', () => {
+            currentQuestionIndex++;
+
+            if (currentQuestionIndex < quizData.length) {
+                loadQuestion();
+            } else {
+                showFinalResult();
+            }
+        });
+
+        // Menampilkan Layar Hasil Akhir Game
+        function showFinalResult() {
+            quizBox.classList.add('hidden');
+            resultBox.classList.remove('hidden');
+            finalScoreText.innerText = score;
+
+            if (score === 100) {
+                resultEmoji.innerText = "👑";
+                resultMessage.innerText = "Masha Allah! Luar biasa sempurna. Seluruh wawasan agamamu teruji sangat matang dan akurat.";
+            } else if (score >= 60) {
+                resultEmoji.innerText = "🎉";
+                resultMessage.innerText = "Alhamdulillah! Hasil yang sangat bagus. Pemahaman agamamu sudah baik, mari terus tingkatkan belajar.";
+            } else {
+                resultEmoji.innerText = "📚";
+                resultMessage.innerText = "Tetap semangat! Jadikan hasil ini sebagai motivasi untuk terus membaca dan memperdalam ilmu agama harian.";
+            }
+        }
+
+        // Merestart Mengulang Game Kembali dari Awal dengan Soal Baru
+        btnRestart.addEventListener('click', () => {
+            currentQuestionIndex = 0;
+            score = 0;
+            resultBox.classList.add('hidden');
+            quizBox.classList.remove('hidden');
+            prepareQuizQuestions(); // Mengacak ulang 5 kumpulan soal baru dari master data
+            loadQuestion();
+        });
+    </script>
+</body>
+</html>
