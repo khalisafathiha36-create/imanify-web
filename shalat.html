@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Jadwal Shalat & Kiblat - Imanify</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,6 +26,10 @@
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+        /* Animasi rotasi halus untuk jarum kompas */
+        #compass-disc {
+            transition: transform 0.2s ease-out;
         }
     </style>
 </head>
@@ -75,7 +79,7 @@
         </div>
     </nav>
 
-    <section class="pt-32 pb-20 px-6 max-w-4xl mx-auto text-center">
+    <main class="pt-32 pb-20 px-6 max-w-5xl mx-auto text-center">
         
         <div class="inline-flex items-center gap-2 bg-[#0F766E]/20 border border-[#0F766E] px-4 py-1.5 rounded-full text-xs font-semibold text-[#D4AF37] mb-6">
             📍 <span id="lokasi-text">Sukabumi, Jawa Barat (Deteksi Otomatis)</span>
@@ -84,51 +88,81 @@
         <h1 class="text-3xl md:text-5xl font-bold mb-2">Waktu Shalat & Arah Kiblat</h1>
         <p id="tanggal-hijri" class="text-gray-400 text-xs md:text-sm mb-10">Memuat info tanggal...</p>
 
-        <div class="glass-card p-8 rounded-3xl max-w-md mx-auto mb-10 shadow-xl">
-            <p class="text-xs uppercase tracking-widest text-gray-400 font-semibold mb-2">Shalat Berikutnya</p>
-            <h2 id="next-shalat-name" class="text-3xl md:text-4xl font-bold text-white mb-1">Menghitung...</h2>
-            <div id="next-shalat-time" class="text-4xl md:text-5xl font-extrabold text-[#D4AF37] tracking-wide mb-4">--:--</div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start mb-10">
             
-            <div class="flex items-center justify-center gap-1.5 text-xs text-emerald-400 font-medium bg-emerald-500/10 py-2 px-4 rounded-xl inline-block">
-                ⏱️ <span id="countdown-string">Menghubungkan waktu...</span>
-            </div>
-        </div>
+            <div class="md:col-span-2 space-y-6">
+                <div class="glass-card p-8 rounded-3xl w-full shadow-xl">
+                    <p class="text-xs uppercase tracking-widest text-gray-400 font-semibold mb-2">Shalat Berikutnya</p>
+                    <h2 id="next-shalat-name" class="text-3xl md:text-4xl font-bold text-white mb-1">Menghitung...</h2>
+                    <div id="next-shalat-time" class="text-4xl md:text-5xl font-extrabold text-[#D4AF37] tracking-wide mb-4">--:--</div>
+                    
+                    <div class="flex items-center justify-center gap-1.5 text-xs text-emerald-400 font-medium bg-emerald-500/10 py-2 px-4 rounded-xl inline-block mx-auto">
+                        ⏱️ <span id="countdown-string">Menghubungkan waktu...</span>
+                    </div>
+                </div>
 
-        <div class="grid grid-cols-2 sm:grid-cols-5 gap-4 text-left">
-            <div id="card-Subuh" class="glass-card p-4 rounded-2xl flex flex-col justify-between h-24">
-                <span class="text-xs text-gray-400 font-medium">Subuh</span>
-                <span id="time-Subuh" class="text-xl font-bold">--:--</span>
+                <div class="grid grid-cols-2 sm:grid-cols-5 gap-4 text-left">
+                    <div id="card-Subuh" class="glass-card p-4 rounded-2xl flex flex-col justify-between h-24">
+                        <span class="text-xs text-gray-400 font-medium">Subuh</span>
+                        <span id="time-Subuh" class="text-lg font-bold">--:--</span>
+                    </div>
+                    <div id="card-Dzuhur" class="glass-card p-4 rounded-2xl flex flex-col justify-between h-24">
+                        <span class="text-xs text-gray-400 font-medium">Dzuhur</span>
+                        <span id="time-Dzuhur" class="text-lg font-bold">--:--</span>
+                    </div>
+                    <div id="card-Ashar" class="glass-card p-4 rounded-2xl flex flex-col justify-between h-24">
+                        <span class="text-xs text-gray-400 font-medium">Ashar</span>
+                        <span id="time-Ashar" class="text-lg font-bold">--:--</span>
+                    </div>
+                    <div id="card-Maghrib" class="glass-card p-4 rounded-2xl flex flex-col justify-between h-24">
+                        <span class="text-xs text-gray-400 font-medium">Maghrib</span>
+                        <span id="time-Maghrib" class="text-lg font-bold">--:--</span>
+                    </div>
+                    <div id="card-Isya" class="glass-card p-4 rounded-2xl flex flex-col justify-between h-24">
+                        <span class="text-xs text-gray-400 font-medium">Isya</span>
+                        <span id="time-Isya" class="text-lg font-bold">--:--</span>
+                    </div>
+                </div>
             </div>
-            <div id="card-Dzuhur" class="glass-card p-4 rounded-2xl flex flex-col justify-between h-24">
-                <span class="text-xs text-gray-400 font-medium">Dzuhur</span>
-                <span id="time-Dzuhur" class="text-xl font-bold">--:--</span>
+
+            <div class="glass-card p-6 rounded-3xl flex flex-col items-center justify-center shadow-xl">
+                <p class="text-xs uppercase tracking-widest text-[#D4AF37] font-semibold mb-4">🧭 Kompas Kiblat</p>
+                
+                <div class="relative w-48 h-48 rounded-full border-4 border-dashed border-[#D4AF37]/40 flex items-center justify-center bg-black/20">
+                    <span class="absolute top-1 text-xs font-bold text-red-500">U</span>
+                    <div id="compass-disc" class="w-full h-full absolute flex items-center justify-center">
+                        <div class="w-1.5 h-24 bg-gradient-to-t from-[#D4AF37] to-amber-300 relative rounded-full">
+                            <div class="absolute -top-2 left-1/2 -translate-x-1/2 text-lg">🕋</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-5 text-center">
+                    <p class="text-xs text-gray-400">Sudut Deklinasi Kakbah:</p>
+                    <p class="text-sm font-bold text-white mt-0.5"><span id="degree-text">295.1°</span> NW (Dari Utara)</p>
+                    <p id="gyro-status" class="text-[10px] text-gray-500 italic mt-2">Gunakan smartphone di permukaan datar untuk sensor gerak.</p>
+                </div>
             </div>
-            <div id="card-Ashar" class="glass-card p-4 rounded-2xl flex flex-col justify-between h-24">
-                <span class="text-xs text-gray-400 font-medium">Ashar</span>
-                <span id="time-Ashar" class="text-xl font-bold">--:--</span>
-            </div>
-            <div id="card-Maghrib" class="glass-card p-4 rounded-2xl flex flex-col justify-between h-24">
-                <span class="text-xs text-gray-400 font-medium">Maghrib</span>
-                <span id="time-Maghrib" class="text-xl font-bold">--:--</span>
-            </div>
-            <div id="card-Isya" class="glass-card p-4 rounded-2xl flex flex-col justify-between h-24">
-                <span class="text-xs text-gray-400 font-medium">Isya</span>
-                <span id="time-Isya" class="text-xl font-bold">--:--</span>
-            </div>
+
         </div>
-    </section>
+    </main>
+
+    <footer class="border-t border-gray-800 bg-[#071413] py-8 px-6 text-center text-xs tracking-wide text-gray-500">
+        <p class="mb-2">© 2026 Imanify Platform. All rights reserved.</p>
+        <p class="font-medium text-gray-400">
+            Engineered with heart by <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#F3E5AB] font-semibold">Khalisa Fathiha Putri Kurnia</span>
+        </p>
+    </footer>
 
     <script>
         // 1. Kontrol Responsif Mobile Menu Navbar
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         if (menuBtn && mobileMenu) {
-            menuBtn.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
+            menuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
         }
 
-        // 2. Data Jadwal Shalat Default Terverifikasi (Sukabumi & Sekitarnya)
+        // 2. Data Jadwal Shalat Default (Sukabumi)
         const jadwalShalatHarian = {
             Subuh: "04:42",
             Dzuhur: "11:58",
@@ -137,31 +171,26 @@
             Isya: "19:08"
         };
 
-        // Render data statis dasar ke UI tabel
         function renderTabelJadwal() {
             for (const [key, value] of Object.entries(jadwalShalatHarian)) {
                 const el = document.getElementById(`time-${key}`);
                 if (el) el.innerText = `${value} WIB`;
             }
-            
-            // Set Tanggal Hari Ini
             const opsi = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             const formatInfo = new Date().toLocaleDateString('id-ID', opsi);
             document.getElementById('tanggal-hijri').innerText = `${formatInfo} • 6 Dzulhijjah 1447 H`;
         }
 
-        // 3. Mesin Detik Countdown Menuju Waktu Shalat Terdekat
+        // 3. Mesin Hitung Mundur Shalat
         function hitungMundurShalat() {
             const sekarang = new Date();
             const jamSekarang = sekarang.getHours();
             const menitSekarang = sekarang.getMinutes();
-            const detikSekarang = sekarang.getSeconds();
             
             let targetShalat = "Subuh";
             let targetWaktuStr = jadwalShalatHarian.Subuh;
             let targetBesok = false;
 
-            // Logika pencarian target shalat berikutnya berdasarkan jam saat ini
             const konversiMenit = (waktuStr) => {
                 const [h, m] = waktuStr.split(':').map(Number);
                 return h * 60 + m;
@@ -170,74 +199,89 @@
             const menitSkrgTotal = jamSekarang * 60 + menitSekarang;
 
             if (menitSkrgTotal < konversiMenit(jadwalShalatHarian.Subuh)) {
-                targetShalat = "Subuh";
-                targetWaktuStr = jadwalShalatHarian.Subuh;
+                targetShalat = "Subuh"; targetWaktuStr = jadwalShalatHarian.Subuh;
             } else if (menitSkrgTotal < konversiMenit(jadwalShalatHarian.Dzuhur)) {
-                targetShalat = "Dzuhur";
-                targetWaktuStr = jadwalShalatHarian.Dzuhur;
+                targetShalat = "Dzuhur"; targetWaktuStr = jadwalShalatHarian.Dzuhur;
             } else if (menitSkrgTotal < konversiMenit(jadwalShalatHarian.Ashar)) {
-                targetShalat = "Ashar";
-                targetWaktuStr = jadwalShalatHarian.Ashar;
+                targetShalat = "Ashar"; targetWaktuStr = jadwalShalatHarian.Ashar;
             } else if (menitSkrgTotal < konversiMenit(jadwalShalatHarian.Maghrib)) {
-                targetShalat = "Maghrib";
-                targetWaktuStr = jadwalShalatHarian.Maghrib;
+                targetShalat = "Maghrib"; targetWaktuStr = jadwalShalatHarian.Maghrib;
             } else if (menitSkrgTotal < konversiMenit(jadwalShalatHarian.Isya)) {
-                targetShalat = "Isya";
-                targetWaktuStr = jadwalShalatHarian.Isya;
+                targetShalat = "Isya"; targetWaktuStr = jadwalShalatHarian.Isya;
             } else {
-                // Jika sudah lewat Isya, target berikutnya adalah Subuh besok hari
-                targetShalat = "Subuh (Besok)";
-                targetWaktuStr = jadwalShalatHarian.Subuh;
-                targetBesok = true;
+                targetShalat = "Subuh (Besok)"; targetWaktuStr = jadwalShalatHarian.Subuh; targetBesok = true;
             }
 
-            // Hitung selisih real-time
             const [tJam, tMenit] = targetWaktuStr.split(':').map(Number);
             let limitObj = new Date();
             limitObj.setHours(tJam, tMenit, 0, 0);
             
-            if (targetBesok) {
-                limitObj.setDate(limitObj.getDate() + 1);
-            }
+            if (targetBesok) limitObj.setDate(limitObj.getDate() + 1);
 
             const selisihMiliDetik = limitObj - sekarang;
-            
-            // Konversi milidetik ke format jam menit detik
             const totalDetik = Math.floor(selisihMiliDetik / 1000);
+            
+            if (totalDetik < 0) {
+                document.getElementById('countdown-string').innerText = "Memasuki waktu shalat!";
+                return;
+            }
+
             const sJam = Math.floor(totalDetik / 3600);
             const sMenit = Math.floor((totalDetik % 3600) / 60);
             const sDetik = totalDetik % 60;
 
-            // Tampilkan hasil perhitungan ke komponen UI Box Utama
             document.getElementById('next-shalat-name').innerText = targetShalat;
             document.getElementById('next-shalat-time').innerText = `${targetWaktuStr} WIB`;
-            document.getElementById('countdown-string').innerText = `${sJam} jam ${sMenit} menit ${sDetik} detik lagi menuju Adzan`;
+            document.getElementById('countdown-string').innerText = `${sJam}j ${sMenit}m ${sDetik}d lagi menuju Adzan`;
 
-            // Reset efek sorotan warna aktif di kartu list grid bawah
             const listCard = ["Subuh", "Dzuhur", "Ashar", "Maghrib", "Isya"];
             listCard.forEach(item => {
                 const card = document.getElementById(`card-${item}`);
                 if (card) {
-                    if (targetShalat.includes(item)) {
-                        card.className = "glass-card p-4 rounded-2xl flex flex-col justify-between h-24 border-[#D4AF37] bg-[#0F766E]/30";
-                    } else {
-                        card.className = "glass-card p-4 rounded-2xl flex flex-col justify-between h-24";
-                    }
+                    card.className = targetShalat.includes(item) 
+                        ? "glass-card p-4 rounded-2xl flex flex-col justify-between h-24 border-[#D4AF37] bg-[#0F766E]/30" 
+                        : "glass-card p-4 rounded-2xl flex flex-col justify-between h-24";
                 }
             });
         }
 
-        // Eksekusi engine saat halaman selesai dimuat di browser
+        // 4. Logika Pergerakan Kompas Menggunakan DeviceOrientation API (Pihak Klien)
+        const qiblaAngle = 295.1; // Sudut arah Kiblat rata-rata dari Indonesia (Kemenag)
+        const compassDisc = document.getElementById('compass-disc');
+
+        function initCompass() {
+            if (window.DeviceOrientationEvent) {
+                // Event listener untuk menangkap rotasi kompas magnetik handphone
+                window.addEventListener('deviceorientationabsolute', handlerKompas, true);
+                window.addEventListener('deviceorientation', handlerKompas, true);
+            }
+        }
+
+        function handlerKompas(event) {
+            let alpha = event.alpha; // Arah derajat rotasi berdasarkan kutub magnet bumi
+            
+            // Mengatasi perbedaan pembacaan perangkat iOS/WebKit
+            if (event.webkitCompassHeading) {
+                alpha = event.webkitCompassHeading;
+            }
+
+            if (alpha !== null && alpha !== undefined) {
+                // Menghitung derajat rotasi jarum agar mengarah stabil ke koordinat Mekkah
+                let rotateDegree = qiblaAngle - alpha;
+                compassDisc.style.transform = `rotate(${rotateDegree}deg)`;
+                document.getElementById('gyro-status').innerText = "Sensor aktif secara real-time.";
+            }
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
             renderTabelJadwal();
             hitungMundurShalat();
-            // Jalankan interval per 1 detik agar jam menghitung mundur terus menerus secara live
             setInterval(hitungMundurShalat, 1000);
+            initCompass();
         });
+
+        // Menghapus tautan login.html otomatis
+        document.querySelectorAll('a[href="login.html"]').forEach(el => el.remove());
     </script>
-    <script>
-    // Otomatis mencari dan menghapus semua tombol/menu yang mengarah ke login.html
-    document.querySelectorAll('a[href="login.html"]').forEach(el => el.remove());
-</script>
 </body>
 </html>
