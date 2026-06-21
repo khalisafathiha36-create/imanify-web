@@ -101,7 +101,7 @@
                     src="about:blank" 
                     allowfullscreen="" 
                     loading="lazy">
-                </iframe>
+                </iframe >
             </div>
 
             <div id="rekomendasi-container" class="space-y-4">
@@ -138,11 +138,11 @@
             ]
         };
 
-        // Fungsi Mengubah Peta Lokasi Menggunakan Google Maps Embed Resmi Tanpa API Key
+        // Fungsi Mengubah Peta Menggunakan Jalur Semat Resmi Google Maps
         function updateMap(query) {
             const mapFrame = document.getElementById('map-frame');
             const cleanQuery = encodeURIComponent(query);
-mapFrame.src = `https://maps.google.com/maps?q=${cleanQuery}&t=&z=14&ie=UTF-8&iwloc=&output=embed`;
+            mapFrame.src = `https://maps.google.com/maps?q=${cleanQuery}&t=&z=14&ie=UTF-8&iwloc=&output=embed`;
         }
 
         // Mengubah Daftar Rekomendasi di Samping Peta
@@ -200,7 +200,6 @@ mapFrame.src = `https://maps.google.com/maps?q=${cleanQuery}&t=&z=14&ie=UTF-8&iw
         });
     </script>
     <script>
-        // Otomatis mencari dan menghapus semua tombol/menu yang mengarah ke login.html
         document.querySelectorAll('a[href="login.html"]').forEach(el => el.remove());
     </script>
 </body>
