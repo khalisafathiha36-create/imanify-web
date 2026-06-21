@@ -142,7 +142,7 @@
         </div>
     </main>
 
-    <div id="article-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md p-4 animate-fade-in">
+    <div id="article-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md p-4">
         <div class="glass-card w-full max-w-2xl max-h-[80vh] rounded-3xl p-6 md:p-8 overflow-y-auto flex flex-col relative border border-[#D4AF37]/30 shadow-2xl">
             <button onclick="closeArticle()" class="absolute top-4 right-4 bg-white/10 hover:bg-white/20 text-white rounded-full px-3 py-1.5 text-xs transition cursor-pointer">
                 ✕ Tutup
@@ -155,8 +155,7 @@
                     <span id="modal-author">Oleh Tim Redaksi Imanify</span>
                     <span id="modal-date"></span>
                 </div>
-                <div id="modal-content" class="text-xs md:text-sm text-gray-300 leading-relaxed space-y-4 text-justify pr-1">
-                    </div>
+                <div id="modal-content" class="text-xs md:text-sm text-gray-300 leading-relaxed space-y-4 text-justify pr-1"></div>
             </div>
         </div>
     </div>
@@ -169,16 +168,14 @@
     </footer>
 
     <script>
-        // Satpam Check Login
-        const sesiAktif = localStorage.getItem('imanify_session');
-        if (!sesiAktif) { window.location.href = "login.html"; }
-
         // Navbar Mobile Toggle
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
 
         // REKAPAN DATABASE MATERI ISI PENUH ARTIKEL
         const isiMateriArtikel = {
@@ -197,7 +194,7 @@
                 judul: "Menjaga Konsistensi (Istiqamah) di Era Digital",
                 tanggal: "20 Juni 2026",
                 paragraf: [
-                    "Di era gempuran informasi digital seperti sekarang, menjaga fokus dan keistiqamahan beribadah menjadi tantangan tersendiri bagi generasi muda. Godaan distraksi dari notifikasi media sosial, game, hingga hiburan video pendek sering kali melalaikan kita, sehingga waktu membaca Al-Qur'an dan dzikir tergeser tanpa sadar.",
+                    "Di era gempuran informasi digital seperti sekarang, menjaga fokus dan keistiqamahan beribadah menjadi tantangan tersendiri bagi generasi muda. Godaan distraksi dari notifikasi media sosial, game, hingga hiburan video pendek sering kali melalaikan kita, sehingga waktu membaca Al-Qur'an and dzikir tergeser tanpa sadar.",
                     "Istiqamah secara bahasa berarti teguh pendirian. Rasulullah SAW bersabda bahwa amalan yang paling dicintai oleh Allah adalah amalan yang dilakukan secara konsisten (*dawaam*), meskipun jumlahnya sedikit. Lebih baik membaca Al-Qur'an 1 baris setiap hari secara konsisten, daripada membaca 1 juz penuh tetapi hanya sekali dalam setahun.",
                     "Strategi terbaik memanfaatkan era digital ini adalah dengan melakukan *digital detox* berkala dan mengubah gadget kita menjadi wasilah kebaikan. Gunakan aplikasi pengingat ibadah kustom seperti platform Imanify ini, ikuti akun-akun edukatif yang memicu motivasi spiritual, dan selalu isi lembar checklist harian agar perkembangan rohanimu terpantau jelas."
                 ]
@@ -219,14 +216,12 @@
             const data = isiMateriArtikel[id];
             if (!data) return;
 
-            // Masukkan teks ke elemen modal
             document.getElementById('modal-tag').innerText = data.tag;
             document.getElementById('modal-title').innerText = data.judul;
             document.getElementById('modal-date').innerText = data.tanggal;
 
-            // Susun paragraf demi paragraf didalam modal content
             const contentBox = document.getElementById('modal-content');
-            contentBox.innerHTML = ""; // Bersihkan sisa teks lama
+            contentBox.innerHTML = ""; 
             
             data.paragraf.forEach(teks => {
                 const p = document.createElement('p');
@@ -234,20 +229,15 @@
                 contentBox.appendChild(p);
             });
 
-            // Tampilkan modal (hapus class hidden)
             document.getElementById('article-modal').classList.remove('hidden');
-            document.body.style.overflow = "hidden"; // Kunci scroll layar utama saat membaca
+            document.body.style.overflow = "hidden"; 
         }
 
         // FUNGSI MENUTUP MODAL
         function closeArticle() {
             document.getElementById('article-modal').classList.add('hidden');
-            document.body.style.overflow = "auto"; // Aktifkan kembali scroll layar utama
+            document.body.style.overflow = "auto"; 
         }
     </script>
-    <script>
-    // otomatis mencari dan menghapus semua tombol/menu yang mengarah ke login.html
-    document.querySelectorAll('a[href="login.html"]').forEach(el => el.remove());
-</script>
 </body>
 </html>
