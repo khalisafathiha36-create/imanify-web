@@ -124,7 +124,8 @@
 
     </section>
 
-    <audio id="audio-bg" src="https://assets.mixkit.co/active_storage/sfx/123/123-84.wav" loop></audio> <audio id="audio-correct" src="https://assets.mixkit.co/active_storage/sfx/2019/2019-84.wav" preload="auto"></audio>
+    <audio id="audio-bg" src="https://assets.mixkit.co/active_storage/sfx/123/123-84.wav" loop></audio> 
+    <audio id="audio-correct" src="https://assets.mixkit.co/active_storage/sfx/2019/2019-84.wav" preload="auto"></audio>
     <audio id="audio-wrong" src="https://assets.mixkit.co/active_storage/sfx/2959/2959-84.wav" preload="auto"></audio>
     <audio id="audio-victory" src="https://assets.mixkit.co/active_storage/sfx/1435/1435-84.wav" preload="auto"></audio>
 
@@ -136,10 +137,6 @@
     </footer>
 
     <script>
-        // Satpam Check Login
-        const sesiAktif = localStorage.getItem('imanify_session');
-        if (!sesiAktif) { window.location.href = "login.html"; }
-
         // 1. Logika Menu Mobile Navbar
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -241,7 +238,6 @@
             prepareQuizQuestions();
             loadQuestion();
             
-            // 🎵 Mulai mainkan musik latar (Volume dikecilkan sedikit agar seimbang)
             sndBg.volume = 0.4;
             sndBg.currentTime = 0;
             sndBg.play().catch(e => console.log('Music blocked by browser'));
@@ -312,7 +308,6 @@
             resultBox.classList.remove('hidden');
             finalScoreText.innerText = score;
             
-            // 🛑 Matikan musik latar saat hasil keluar
             sndBg.pause();
 
             if (score === 100) {
@@ -363,14 +358,9 @@
             prepareQuizQuestions();
             loadQuestion();
             
-            // 🎵 Putar lagi musik latarnya saat ulang kuis
             sndBg.currentTime = 0;
             sndBg.play().catch(e => console.log('Music blocked'));
         });
     </script>
-    <script>
-    // Otomatis mencari dan menghapus semua tombol/menu yang mengarah ke login.html
-    document.querySelectorAll('a[href="login.html"]').forEach(el => el.remove());
-</script>
 </body>
 </html>
