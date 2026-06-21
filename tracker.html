@@ -82,7 +82,7 @@
 
     <main class="pt-32 pb-24 px-6 max-w-3xl mx-auto min-h-screen">
         <div class="text-center mb-10">
-            <h1 class="text-3xl md:text-5xl font-bold mb-3">📈 Mutaba'ah <span class="text-[#D4AF37]">Yauumiyah</span></h1>
+            <h1 class="text-3xl md:text-5xl font-bold mb-3">📈 Mutaba'ah <span class="text-[#D4AF37]">Yaumiyah</span></h1>
             <p class="text-gray-400 text-xs md:text-sm max-w-md mx-auto">Evaluasi dan catat perkembangan ibadah harianmu secara mandiri untuk menjaga konsistensi iman.</p>
         </div>
 
@@ -95,6 +95,11 @@
                 <div id="progress-bar" class="bg-gradient-to-r from-[#0F766E] to-[#D4AF37] h-full w-[0%] transition-all duration-500 rounded-full"></div>
             </div>
             <p id="motivate-text" class="text-[11px] text-gray-400 italic mt-3 text-center">"Semangat! Yuk mulai centang ibadah yang sudah kamu selesaikan hari ini."</p>
+            <div class="mt-4 flex justify-center">
+                <button id="reset-btn" class="text-[10px] bg-red-500/10 hover:bg-red-500/20 text-red-400 px-3 py-1 rounded-lg border border-red-500/20 transition">
+                    🔄 Reset Progress
+                </button>
+            </div>
         </div>
 
         <div class="space-y-4">
@@ -103,19 +108,19 @@
                 <h3 class="text-xs font-bold text-[#D4AF37] tracking-wider uppercase mb-4 flex items-center gap-1.5">🧎‍♂️ Shalat Fardhu (Wajib)</h3>
                 <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
                     <label class="flex items-center gap-2 bg-white/5 p-2 rounded-xl border border-white/5 cursor-pointer hover:border-white/20 transition text-xs">
-                        <input type="checkbox" class="tracker-checkbox accent-[#0F766E] w-4 h-4"> Subuh
+                        <input type="checkbox" id="sholat-subuh" class="tracker-checkbox accent-[#0F766E] w-4 h-4"> Subuh
                     </label>
                     <label class="flex items-center gap-2 bg-white/5 p-2 rounded-xl border border-white/5 cursor-pointer hover:border-white/20 transition text-xs">
-                        <input type="checkbox" class="tracker-checkbox accent-[#0F766E] w-4 h-4"> Dzuhur
+                        <input type="checkbox" id="sholat-dzuhur" class="tracker-checkbox accent-[#0F766E] w-4 h-4"> Dzuhur
                     </label>
                     <label class="flex items-center gap-2 bg-white/5 p-2 rounded-xl border border-white/5 cursor-pointer hover:border-white/20 transition text-xs">
-                        <input type="checkbox" class="tracker-checkbox accent-[#0F766E] w-4 h-4"> Ashar
+                        <input type="checkbox" id="sholat-ashar" class="tracker-checkbox accent-[#0F766E] w-4 h-4"> Ashar
                     </label>
                     <label class="flex items-center gap-2 bg-white/5 p-2 rounded-xl border border-white/5 cursor-pointer hover:border-white/20 transition text-xs">
-                        <input type="checkbox" class="tracker-checkbox accent-[#0F766E] w-4 h-4"> Maghrib
+                        <input type="checkbox" id="sholat-maghrib" class="tracker-checkbox accent-[#0F766E] w-4 h-4"> Maghrib
                     </label>
                     <label class="flex items-center gap-2 bg-white/5 p-2 rounded-xl border border-white/5 cursor-pointer hover:border-white/20 transition text-xs">
-                        <input type="checkbox" class="tracker-checkbox accent-[#0F766E] w-4 h-4"> Isya
+                        <input type="checkbox" id="sholat-isya" class="tracker-checkbox accent-[#0F766E] w-4 h-4"> Isya
                     </label>
                 </div>
             </div>
@@ -124,16 +129,16 @@
                 <h3 class="text-xs font-bold text-purple-300 tracking-wider uppercase mb-4 flex items-center gap-1.5">✨ Dzikir & Sunnah</h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <label class="flex items-center gap-3 bg-white/5 p-3 rounded-xl border border-white/5 cursor-pointer hover:border-white/20 transition text-xs">
-                        <input type="checkbox" class="tracker-checkbox accent-[#0F766E] w-4 h-4"> Dzikir Pagi (Al-Matsurat)
+                        <input type="checkbox" id="dzikir-pagi" class="tracker-checkbox accent-[#0F766E] w-4 h-4"> Dzikir Pagi (Al-Matsurat)
                     </label>
                     <label class="flex items-center gap-3 bg-white/5 p-3 rounded-xl border border-white/5 cursor-pointer hover:border-white/20 transition text-xs">
-                        <input type="checkbox" class="tracker-checkbox accent-[#0F766E] w-4 h-4"> Dzikir Petang (Al-Matsurat)
+                        <input type="checkbox" id="dzikir-petang" class="tracker-checkbox accent-[#0F766E] w-4 h-4"> Dzikir Petang (Al-Matsurat)
                     </label>
                     <label class="flex items-center gap-3 bg-white/5 p-3 rounded-xl border border-white/5 cursor-pointer hover:border-white/20 transition text-xs">
-                        <input type="checkbox" class="tracker-checkbox accent-[#0F766E] w-4 h-4"> Shalat Sunnah Rawatib
+                        <input type="checkbox" id="sunnah-rawatib" class="tracker-checkbox accent-[#0F766E] w-4 h-4"> Shalat Sunnah Rawatib
                     </label>
                     <label class="flex items-center gap-3 bg-white/5 p-3 rounded-xl border border-white/5 cursor-pointer hover:border-white/20 transition text-xs">
-                        <input type="checkbox" class="tracker-checkbox accent-[#0F766E] w-4 h-4"> Shalat Duha / Tahajjud
+                        <input type="checkbox" id="sunnah-tahajjud" class="tracker-checkbox accent-[#0F766E] w-4 h-4"> Shalat Duha / Tahajjud
                     </label>
                 </div>
             </div>
@@ -142,10 +147,10 @@
                 <h3 class="text-xs font-bold text-emerald-300 tracking-wider uppercase mb-4 flex items-center gap-1.5">📖 Al-Qur'an & Shaum</h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <label class="flex items-center gap-3 bg-white/5 p-3 rounded-xl border border-white/5 cursor-pointer hover:border-white/20 transition text-xs">
-                        <input type="checkbox" class="tracker-checkbox accent-[#0F766E] w-4 h-4"> Membaca Al-Qur'an (Minimal 1 Ruku/Lembar)
+                        <input type="checkbox" id="tilawah-quran" class="tracker-checkbox accent-[#0F766E] w-4 h-4"> Membaca Al-Qur'an (Minimal 1 Ruku/Lembar)
                     </label>
                     <label class="flex items-center gap-3 bg-white/5 p-3 rounded-xl border border-white/5 cursor-pointer hover:border-white/20 transition text-xs">
-                        <input type="checkbox" class="tracker-checkbox accent-[#0F766E] w-4 h-4"> Puasa Sunnah (Senin-Kamis / Ayyamul Bidh)
+                        <input type="checkbox" id="puasa-sunnah" class="tracker-checkbox accent-[#0F766E] w-4 h-4"> Puasa Sunnah (Senin-Kamis / Ayyamul Bidh)
                     </label>
                 </div>
             </div>
@@ -164,30 +169,48 @@
         // Logika Navigasi Hamburger Mobile Menu
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
-        menuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+        }
 
-        // Logika Penghitungan Live Persentase Tracker
+        // Selektor Komponen Tracker
         const checkboxes = document.querySelectorAll('.tracker-checkbox');
         const progressBar = document.getElementById('progress-bar');
         const progressPercent = document.getElementById('progress-percent');
         const motivateText = document.getElementById('motivate-text');
+        const resetBtn = document.getElementById('reset-btn');
 
+        // Fungsi Memuat Data Terpilih dari LocalStorage Saat Pertama Buka Halaman
+        function loadSavedProgress() {
+            checkboxes.forEach(box => {
+                const savedState = localStorage.getItem(box.id);
+                if (savedState === 'true') {
+                    box.checked = true;
+                }
+            });
+            updateProgress();
+        }
+
+        // Fungsi Menghitung Persentase Capaian & Memberikan Kutipan Motivasi
         function updateProgress() {
             const total = checkboxes.length;
             let checkedCount = 0;
 
             checkboxes.forEach(box => {
-                if (box.checked) checkedCount++;
+                if (box.checked) {
+                    checkedCount++;
+                    localStorage.setItem(box.id, 'true'); // Simpan status True
+                } else {
+                    localStorage.setItem(box.id, 'false'); // Simpan status False
+                }
             });
 
-            // Hitung bulat persentase progres
-            const percentage = Math.round((checkedCount / total) * 100);
+            const percentage = total > 0 ? Math.round((checkedCount / total) * 100) : 0;
 
-            // Update UI Tampilan bar
+            // Perbarui Tampilan Antarmuka (UI)
             progressBar.style.width = `${percentage}%`;
             progressPercent.innerText = `${percentage}%`;
 
-            // Ubah teks kalimat motivasi berdasarkan persentase capaian amalan
             if (percentage === 0) {
                 motivateText.innerText = '"Semangat! Yuk mulai centang ibadah yang sudah kamu selesaikan hari ini."';
             } else if (percentage > 0 && percentage < 50) {
@@ -199,14 +222,29 @@
             }
         }
 
-        // Tambahkan event listener di setiap checkbox ketika statusnya berubah klik
+        // Fungsi Tombol Reset Ulang Data Progress Kembali ke Nol
+        if (resetBtn) {
+            resetBtn.addEventListener('click', () => {
+                if(confirm("Apakah kamu yakin ingin mengosongkan kembali seluruh riwayat checklist ibadah hari ini?")) {
+                    checkboxes.forEach(box => {
+                        box.checked = false;
+                        localStorage.removeItem(box.id);
+                    });
+                    updateProgress();
+                }
+            });
+        }
+
+        // Daftarkan Event Listener Klik ke Seluruh Kotak Pilihan
         checkboxes.forEach(box => {
             box.addEventListener('change', updateProgress);
         });
+
+        // Eksekusi Pemuatan Memori saat DOM Selesai Di-render
+        window.addEventListener('DOMContentLoaded', loadSavedProgress);
+
+        // Otomatis bersihkan tautan login hantu
+        document.querySelectorAll('a[href="login.html"]').forEach(el => el.remove());
     </script>
-    <script>
-    // Otomatis mencari dan menghapus semua tombol/menu yang mengarah ke login.html
-    document.querySelectorAll('a[href="login.html"]').forEach(el => el.remove());
-</script>
 </body>
 </html>
