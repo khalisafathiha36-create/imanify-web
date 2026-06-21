@@ -97,40 +97,16 @@
             <div class="lg:col-span-2 glass-card rounded-2xl overflow-hidden h-[350px] lg:h-[450px]">
                 <iframe 
                     id="map-frame"
-                    class="w-full h-full border-0 grayscale invert opacity-80" 
-                    src="https://maps.google.com/maps?q=Masjid%20Agung%20Sukabumi&t=&z=15&ie=UTF-8&iwloc=&output=embed" 
+                    class="w-full h-full border-0 grayscale invert opacity-75" 
+                    src="about:blank" 
                     allowfullscreen="" 
                     loading="lazy">
-                </iframe>
+                 iframe>
             </div>
 
-            <div class="space-y-4">
+            <div id="rekomendasi-container" class="space-y-4">
                 <h2 class="text-sm font-bold tracking-wider text-[#D4AF37] uppercase mb-1">📍 Masjid Terdekat</h2>
-                
-                <div class="glass-card p-4 rounded-xl border border-white/5 hover:border-[#D4AF37]/40 transition cursor-pointer" onclick="updateMap('Masjid Agung Sukabumi')">
-                    <h3 class="text-xs md:text-sm font-bold text-white">Masjid Agung Sukabumi</h3>
-                    <p class="text-[11px] text-gray-400 mt-1">Jl. Alun-Alun Utara No.1, Gn. Parang</p>
-                    <div class="mt-2 flex gap-1.5 text-[10px] text-emerald-400 font-medium">
-                        <span>Parkir Luas</span> • <span>Mukena/Sarung</span>
-                    </div>
                 </div>
-
-                <div class="glass-card p-4 rounded-xl border border-white/5 hover:border-[#D4AF37]/40 transition cursor-pointer" onclick="updateMap('Masjid Raya Raudhatul Irfan')">
-                    <h3 class="text-xs md:text-sm font-bold text-white">Masjid Raudhatul Irfan</h3>
-                    <p class="text-[11px] text-gray-400 mt-1">Jl. Jalur Lingkar Selatan, Cisaat</p>
-                    <div class="mt-2 flex gap-1.5 text-[10px] text-emerald-400 font-medium">
-                        <span>Rest Area</span> • <span>Tempat Nyaman</span>
-                    </div>
-                </div>
-
-                <div class="glass-card p-4 rounded-xl border border-white/5 hover:border-[#D4AF37]/40 transition cursor-pointer" onclick="updateMap('Masjid Istiqlal Jakarta')">
-                    <h3 class="text-xs md:text-sm font-bold text-white">Masjid Istiqlal (Contoh Luar)</h3>
-                    <p class="text-[11px] text-gray-400 mt-1">Jl. Taman Wijaya Kusuma, Jakarta Pusat</p>
-                    <div class="mt-2 flex gap-1.5 text-[10px] text-purple-400 font-medium">
-                        <span>Ikonik</span> • <span>Sangat Luas</span>
-                    </div>
-                </div>
-            </div>
         </div>
     </main>
 
@@ -143,91 +119,90 @@
 
     <script>
         // Logika Mobile Menu Navbar
-const menuBtn = document.getElementById('menu-btn');
-const mobileMenu = document.getElementById('mobile-menu');
-menuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
 
-// DATABASE MASJID BERDASARKAN KOTA
-const dataMasjid = {
-    "sukabumi": [
-        { nama: "Masjid Agung Sukabumi", alamat: "Jl. Alun-Alun Utara No.1, Gn. Parang", fasilitas: "Parkir Luas • Mukena/Sarung" },
-        { nama: "Masjid Raya Raudhatul Irfan", alamat: "Jl. Jalur Lingkar Selatan, Cisaat", fasilitas: "Rest Area • Nyaman" }
-    ],
-    "jakarta": [
-        { nama: "Masjid Istiqlal", alamat: "Jl. Taman Wijaya Kusuma, Jakarta Pusat", fasilitas: "Ikonik • Sangat Luas" },
-        { nama: "Masjid Agung Al-Azhar", alamat: "Jl. Sisingamangaraja, Kebayoran Baru", fasilitas: "Area Teduh • Nyaman" }
-    ],
-    "bandung": [
-        { nama: "Masjid Raya Bandung", alamat: "Jl. Asia Afrika, Balonggede", fasilitas: "Alun-alun Rumput • Strategis" },
-        { nama: "Masjid Al-Jabbar", alamat: "Jl. Cimencrang No.14, Gedebage", fasilitas: "Masjid Terapung • Megah" }
-    ]
-};
+        // DATABASE MASJID BERDASARKAN KOTA
+        const dataMasjid = {
+            "sukabumi": [
+                { nama: "Masjid Agung Sukabumi", alamat: "Jl. Alun-Alun Utara No.1, Gn. Parang", fasilitas: "Parkir Luas • Mukena/Sarung" },
+                { nama: "Masjid Raya Raudhatul Irfan", alamat: "Jl. Jalur Lingkar Selatan, Cisaat", fasilitas: "Rest Area • Nyaman" }
+            ],
+            "jakarta": [
+                { nama: "Masjid Istiqlal", alamat: "Jl. Taman Wijaya Kusuma, Jakarta Pusat", fasilitas: "Ikonik • Sangat Luas" },
+                { nama: "Masjid Agung Al-Azhar", alamat: "Jl. Sisingamangaraja, Kebayoran Baru", fasilitas: "Area Teduh • Nyaman" }
+            ],
+            "bandung": [
+                { nama: "Masjid Raya Bandung", alamat: "Jl. Asia Afrika, Balonggede", fasilitas: "Alun-alun Rumput • Strategis" },
+                { nama: "Masjid Al-Jabbar", alamat: "Jl. Cimencrang No.14, Gedebage", fasilitas: "Masjid Terapung • Megah" }
+            ]
+        };
 
-// Fungsi Mengubah Peta Lokasi Masjid (Sudah diperbaiki dari typo)
-function updateMap(query) {
-    const mapFrame = document.getElementById('map-frame');
-    mapFrame.src = "https://maps.google.com/maps?q=" + encodeURIComponent(query) + "&t=&z=15&ie=UTF-8&iwloc=&output=embed";
-}
+        // Fungsi Mengubah Peta Lokasi Menggunakan Google Maps Embed Resmi
+        function updateMap(query) {
+            const mapFrame = document.getElementById('map-frame');
+            // Menggunakan struktur URL pencarian resmi embeds tanpa API Key
+            mapFrame.src = `https://maps.google.com/maps?q=${encodeURIComponent(query)}&t=&z=15&ie=UTF-8&iwloc=&output=embed`;
+        }
 
-// Mengubah Daftar Rekomendasi di Semicircle/Samping Peta
-function updateRekomendasi(kota) {
-    const kotaKey = kota.toLowerCase().trim();
-    const container = document.querySelector('.space-y-4'); 
-    
-    const judul = '<h2 class="text-sm font-bold tracking-wider text-[#D4AF37] uppercase mb-1">📍 Masjid Terdekat</h2>';
-    
-    if (dataMasjid[kotaKey]) {
-        let listHtml = judul;
-        
-        dataMasjid[kotaKey].forEach(masjid => {
-            listHtml += `
-                <div class="glass-card p-4 rounded-xl border border-white/5 hover:border-[#D4AF37]/40 transition cursor-pointer" onclick="updateMap('${masjid.nama}')">
-                    <h3 class="text-xs md:text-sm font-bold text-white">${masjid.nama}</h3>
-                    <p class="text-[11px] text-gray-400 mt-1">${masjid.alamat}</p>
-                    <div class="mt-2 flex gap-1.5 text-[10px] text-emerald-400 font-medium">
-                        <span>${masjid.fasilitas}</span>
+        // Mengubah Daftar Rekomendasi di Samping Peta
+        function updateRekomendasi(kota) {
+            const kotaKey = kota.toLowerCase().trim();
+            const container = document.getElementById('rekomendasi-container'); 
+            const judul = '<h2 class="text-sm font-bold tracking-wider text-[#D4AF37] uppercase mb-1">📍 Masjid Terdekat</h2>';
+            
+            if (dataMasjid[kotaKey]) {
+                let listHtml = judul;
+                dataMasjid[kotaKey].forEach(masjid => {
+                    listHtml += `
+                        <div class="glass-card p-4 rounded-xl border border-white/5 hover:border-[#D4AF37]/40 transition cursor-pointer" onclick="updateMap('${masjid.nama}')">
+                            <h3 class="text-xs md:text-sm font-bold text-white">${masjid.nama}</h3>
+                            <p class="text-[11px] text-gray-400 mt-1">${masjid.alamat}</p>
+                            <div class="mt-2 flex gap-1.5 text-[10px] text-emerald-400 font-medium">
+                                <span>${masjid.fasilitas}</span>
+                            </div>
+                        </div>
+                    `;
+                });
+                container.innerHTML = listHtml;
+            } else {
+                container.innerHTML = `
+                    ${judul}
+                    <div class="glass-card p-4 rounded-xl border border-white/5 bg-white/5">
+                        <p class="text-xs text-gray-400 italic">
+                            Rekomendasi list untuk kota "${kota}" belum tersedia di database internal kami, namun sistem peta di samping tetap melacak pencarianmu.
+                        </p>
                     </div>
-                </div>
-            `;
+                `;
+            }
+        }
+
+        // Logika Tombol Input Cari Manual
+        document.getElementById('btn-search').addEventListener('click', () => {
+            const inputVal = document.getElementById('search-city').value.trim();
+            if (inputVal !== "") {
+                updateMap("Masjid di " + inputVal);
+                updateRekomendasi(inputVal);
+            }
         });
-        container.innerHTML = listHtml;
-    } else {
-        container.innerHTML = `
-            ${judul}
-            <div class="glass-card p-4 rounded-xl border border-white/5 bg-white/5">
-                <p class="text-xs text-gray-400 italic">
-                    Rekomendasi list untuk kota "${kota}" belum terdaftar, tapi peta di samping tetap melacak lokasi masjid terdekat di sana.
-                </p>
-            </div>
-        `;
-    }
-}
 
-// Logika Tombol Input Cari Manual
-document.getElementById('btn-search').addEventListener('click', () => {
-    const inputVal = document.getElementById('search-city').value;
-    if (inputVal.trim() !== "") {
-        updateMap("Masjid di " + inputVal);
-        updateRekomendasi(inputVal);
-    }
-});
+        // Izinkan pencarian dengan menekan tombol "Enter"
+        document.getElementById('search-city').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                document.getElementById('btn-search').click();
+            }
+        });
 
-// Izinkan pencarian dengan menekan tombol "Enter" di keyboard
-document.getElementById('search-city').addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        document.getElementById('btn-search').click();
-    }
-});
-
-// Set default saat halaman pertama dibuka
-window.addEventListener('DOMContentLoaded', () => {
-    updateRekomendasi("Sukabumi");
-    updateMap("Masjid Agung Sukabumi");
-});
+        // Set data awal secara otomatis saat halaman dimuat
+        window.addEventListener('DOMContentLoaded', () => {
+            updateRekomendasi("Sukabumi");
+            updateMap("Masjid Agung Sukabumi");
+        });
     </script>
     <script>
-    // Otomatis mencari dan menghapus semua tombol/menu yang mengarah ke login.html
-    document.querySelectorAll('a[href="login.html"]').forEach(el => el.remove());
-</script>
+        // Otomatis mencari dan menghapus semua tombol/menu yang mengarah ke login.html
+        document.querySelectorAll('a[href="login.html"]').forEach(el => el.remove());
+    </script>
 </body>
 </html>
