@@ -100,7 +100,7 @@
                         </div>
                         <div>
                             <label class="block text-xs font-medium text-gray-300 mb-1.5">Harga Beras per Kg saat ini (Rp)</label>
-                            <input id="fitrah-beras" type="number" value="15000" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#D4AF37]">
+                            <input id="fitrah-beras" type="number" min="0" value="15000" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#D4AF37]">
                         </div>
                     </div>
                 </div>
@@ -123,11 +123,11 @@
                     <div class="space-y-4">
                         <div>
                             <label class="block text-xs font-medium text-gray-300 mb-1.5">Total Harta Simpanan/Tabungan (Rp)</label>
-                            <input id="maal-harta" type="number" placeholder="Contoh: 100000000" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#D4AF37]">
+                            <input id="maal-harta" type="number" min="0" placeholder="Contoh: 100000000" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#D4AF37]">
                         </div>
                         <div>
                             <label class="block text-xs font-medium text-gray-300 mb-1.5">Harga Emas Murni per Gram Saat Ini (Rp)</label>
-                            <input id="maal-emas" type="number" value="1400000" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#D4AF37]">
+                            <input id="maal-emas" type="number" min="0" value="1400000" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#D4AF37]">
                         </div>
                     </div>
                 </div>
@@ -156,7 +156,9 @@
         // Logika Hamburger Mobile Menu Navbar
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
-        menuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+        }
 
         // Fungsi memformat angka ke Rupiah
         function formatRupiah(angka) {
@@ -164,56 +166,61 @@
         }
 
         // 1. LOGIKA HITUNG ZAKAT FITRAH
-        document.getElementById('btn-calc-fitrah').addEventListener('click', () => {
-            const jiwa = parseFloat(document.getElementById('fitrah-jiwa').value) || 0;
-            const hargaBeras = parseFloat(document.getElementById('fitrah-beras').value) || 0;
+        const btnCalcFitrah = document.getElementById('btn-calc-fitrah');
+        if (btnCalcFitrah) {
+            btnCalcFitrah.addEventListener('click', () => {
+                const jiwa = parseFloat(document.getElementById('fitrah-jiwa').value) || 0;
+                const hargaBeras = parseFloat(document.getElementById('fitrah-beras').value) || 0;
 
-            if(jiwa <= 0 || hargaBeras <= 0) {
-                alert("Harap masukkan jumlah jiwa dan harga beras dengan benar.");
-                return;
-            }
+                if(jiwa <= 0 || hargaBeras <= 0) {
+                    alert("Harap masukkan jumlah jiwa dan harga beras dengan benar.");
+                    return;
+                }
 
-            // Aturan fikih: 2.5 Kg per jiwa
-            const totalKg = jiwa * 2.5;
-            const totalUang = totalKg * hargaBeras;
+                // Aturan fikih: 2.5 Kg per jiwa
+                const totalKg = jiwa * 2.5;
+                const totalUang = totalKg * hargaBeras;
 
-            document.getElementById('result-fitrah').innerText = formatRupiah(totalUang);
-            document.getElementById('result-fitrah-kg').innerText = `(Setara dengan total ${totalKg} Kg beras untuk ${jiwa} jiwa)`;
-        });
+                document.getElementById('result-fitrah').innerText = formatRupiah(totalUang);
+                document.getElementById('result-fitrah-kg').innerText = `(Setara dengan total ${totalKg} Kg beras untuk ${jiwa} jiwa)`;
+            });
+        }
 
         // 2. LOGIKA HITUNG ZAKAT MAAL
-        document.getElementById('btn-calc-maal').addEventListener('click', () => {
-            const harta = parseFloat(document.getElementById('maal-harta').value) || 0;
-            const hargaEmas = parseFloat(document.getElementById('maal-emas').value) || 0;
+        const btnCalcMaal = document.getElementById('btn-calc-maal');
+        if (btnCalcMaal) {
+            btnCalcMaal.addEventListener('click', () => {
+                const harta = parseFloat(document.getElementById('maal-harta').value) || 0;
+                const hargaEmas = parseFloat(document.getElementById('maal-emas').value) || 0;
 
-            if(harta <= 0 || hargaEmas <= 0) {
-                alert("Harap masukkan jumlah harta simpanan dan harga emas ter-update.");
-                return;
-            }
+                if(harta <= 0 || hargaEmas <= 0) {
+                    alert("Harap masukkan jumlah harta simpanan dan harga emas ter-update.");
+                    return;
+                }
 
-            // Nisab Zakat Maal adalah senilai 85 gram emas murni
-            const batasNisab = 85 * hargaEmas;
+                // Nisab Zakat Maal adalah senilai 85 gram emas murni
+                const batasNisab = 85 * hargaEmas;
 
-            const statusEl = document.getElementById('maal-status');
-            const resultEl = document.getElementById('result-maal');
+                const statusEl = document.getElementById('maal-status');
+                const resultEl = document.getElementById('result-maal');
 
-            if (harta >= batasNisab) {
-                // Jika harta melewati nisab, wajib zakat sebesar 2.5%
-                const wajibZakat = harta * 0.025;
-                resultEl.innerText = formatRupiah(wajibZakat);
-                statusEl.innerText = "Harta Anda mencapai nisab (" + formatRupiah(batasNisab) + "). Wajib mengeluarkan zakat.";
-                statusEl.className = "text-[10px] text-emerald-400 font-medium block mt-0.5";
-            } else {
-                // Jika belum mencapai nisab
-                resultEl.innerText = "Rp 0";
-                statusEl.innerText = "Harta belum mencapai batas nisab minimum (" + formatRupiah(batasNisab) + "). Belum wajib zakat maal.";
-                statusEl.className = "text-[10px] text-gray-400 italic block mt-0.5";
-            }
-        });
+                if (harta >= batasNisab) {
+                    // Jika harta melewati nisab, wajib zakat sebesar 2.5%
+                    const wajibZakat = harta * 0.025;
+                    resultEl.innerText = formatRupiah(wajibZakat);
+                    statusEl.innerText = "Harta Anda mencapai nisab (" + formatRupiah(batasNisab) + "). Wajib mengeluarkan zakat.";
+                    statusEl.className = "text-[10px] text-emerald-400 font-medium block mt-0.5";
+                } else {
+                    // Jika belum mencapai nisab
+                    resultEl.innerText = "Rp 0";
+                    statusEl.innerText = "Harta belum mencapai batas nisab minimum (" + formatRupiah(batasNisab) + "). Belum wajib zakat maal.";
+                    statusEl.className = "text-[10px] text-gray-400 italic block mt-0.5";
+                }
+            });
+        }
+
+        // Otomatis mencari dan menghapus semua tombol/menu yang mengarah ke login.html
+        document.querySelectorAll('a[href="login.html"]').forEach(el => el.remove());
     </script>
-    <script>
-    // Otomatis mencari dan menghapus semua tombol/menu yang mengarah ke login.html
-    document.querySelectorAll('a[href="login.html"]').forEach(el => el.remove());
-</script>
 </body>
 </html>
